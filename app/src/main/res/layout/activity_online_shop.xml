@@ -17,7 +17,7 @@
         app:menu="@menu/navigation_menu"
         app:headerLayout="@layout/layout_header_navigation"/>
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/fragment_toolbar"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
