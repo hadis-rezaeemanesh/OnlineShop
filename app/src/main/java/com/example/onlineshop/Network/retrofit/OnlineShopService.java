@@ -1,5 +1,7 @@
 package com.example.onlineshop.Network.retrofit;
 
+import com.example.onlineshop.model.Product;
+
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +13,6 @@ import retrofit2.http.QueryMap;
 public interface OnlineShopService {
 
     @GET("products?")
-    Call<List<Response>> listItems(@QueryMap Map<String, String> options);
+    Call<List<Product>> listItems(@QueryMap Map<String, String> options);
 
 }

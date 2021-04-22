@@ -1,6 +1,7 @@
 package com.example.onlineshop.model;
 
 public class Product {
+    private int mId;
     private String mName;
     private String mPrice;
     private String mUrl;
@@ -8,10 +9,19 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String price, String url) {
+    public Product(int id, String name, String price, String url) {
+        mId = id;
         mName = name;
         mPrice = price;
         mUrl = url;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
     }
 
     public String getName() {
