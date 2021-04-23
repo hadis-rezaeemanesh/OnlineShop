@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.fragment.ProductListFragment;
+import com.example.onlineshop.fragment.ToolbarFragment;
 
 public class MainActivity extends SingleFragmentActivity {
 
@@ -19,7 +20,7 @@ public class MainActivity extends SingleFragmentActivity {
 
     @Override
     public Fragment createFragment() {
-        return ProductListFragment.newInstance();
+        return ToolbarFragment.newInstance();
     }
 
 }

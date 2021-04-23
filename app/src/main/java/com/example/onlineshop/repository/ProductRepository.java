@@ -18,6 +18,14 @@ public class ProductRepository {
 
     private static final String TAG = "ProductRepository";
     private OnlineShopService mService;
+    private static ProductRepository sInstance;
+
+
+    public static ProductRepository getInstance(){
+        if (sInstance == null)
+            sInstance = new ProductRepository();
+        return sInstance;
+    }
 
     public ProductRepository(){
         Retrofit retrofit = RetrofitInstance.getInstance();

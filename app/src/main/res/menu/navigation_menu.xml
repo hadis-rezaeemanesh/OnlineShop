@@ -4,5 +4,6 @@
         <item android:title="منوی اصلی" />
         <item android:title="منوی خرید" />
         <item android:title="منوی محصولات" />
+        <item android:title="منوی برنامه" />
     </group>
 </menu>
