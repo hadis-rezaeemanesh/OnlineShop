@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout_online_shop"
     tools:context=".activity.MainActivity">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_linear_layout"
+        android:orientation="vertical">
+
+        <include layout="@layout/fragment_toolbar"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_container"/>
+
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -15,8 +30,6 @@
         android:layout_gravity="right"
         app:menu="@menu/navigation_menu"
         app:headerLayout="@layout/layout_header_navigation"/>
-
-    <include layout="@layout/fragment_toolbar"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -64,8 +65,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         }
 
         public void bind(Product product){
-            mNameProduct.setText(product.getName());
-            mPriceProduct.setText(product.getPrice());
+            Picasso.get()
+                    .load(product.getUrl())
+                    .placeholder(R.drawable.place_holder)
+                    .into(mPhotoProduct);
         }
     }
 }
