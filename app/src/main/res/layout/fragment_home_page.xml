@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.HomePageFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_view_popular"
+                android:text="@string/popular_product"
+                android:layout_gravity="right"
+                android:layout_margin="15dp"
+                android:textSize="20sp"
+                android:padding="5dp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_view_popular"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_view_newest"
+                android:text="@string/newest_product"
+                android:layout_gravity="right"
+                android:layout_margin="15dp"
+                android:textSize="20sp"
+                android:padding="5dp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_view_newest"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_view_recent"
+                android:text="@string/recent_product"
+                android:layout_gravity="right"
+                android:layout_margin="15dp"
+                android:textSize="20sp"
+                android:padding="5dp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_view_recent"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</layout>

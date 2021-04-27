@@ -1,15 +1,13 @@
-package com.example.onlineshop.activity;
+package com.example.onlineshop.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
-import com.example.onlineshop.R;
-import com.example.onlineshop.fragment.ProductListFragment;
-import com.example.onlineshop.fragment.ToolbarFragment;
+import com.example.onlineshop.view.fragment.HomePageFragment;
+import com.example.onlineshop.view.fragment.ProductListFragment;
+import com.example.onlineshop.view.fragment.ToolbarFragment;
 
 public class MainActivity extends SingleFragmentActivity {
 

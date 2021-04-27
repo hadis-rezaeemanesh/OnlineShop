@@ -2,4 +2,8 @@
     <string name="app_name">OnlineShop</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string name="popular_product">بهترین محصولات</string>
+    <string name="newest_product">جدیدترین محصولات</string>
+    <string name="recent_product">پربازدیدترین محصولات</string>
 </resources>

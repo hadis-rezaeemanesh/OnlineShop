@@ -1,10 +1,10 @@
-package com.example.onlineshop.fragment;
+package com.example.onlineshop.view.fragment;
 
 import android.os.Bundle;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +12,19 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.ProductAdapter;
+import com.example.onlineshop.databinding.FragmentProductListBinding;
 import com.example.onlineshop.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductListFragment extends Fragment {
-    private RecyclerView mRecyclerView;
+
+    private FragmentProductListBinding mBinding;
 
     public ProductListFragment() {
         // Required empty public constructor
     }
-    // TODO: Rename and change types and number of parameters
     public static ProductListFragment newInstance() {
         ProductListFragment fragment = new ProductListFragment();
         Bundle args = new Bundle();
@@ -39,12 +40,13 @@ public class ProductListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_product_list, container, false);
-        findViews(view);
+
+        mBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_product_list, container, false);
+
         initViews();
         setAdapters();
-        return view;
+        return mBinding.getRoot();
     }
 
     private void setAdapters() {
@@ -56,14 +58,14 @@ public class ProductListFragment extends Fragment {
             items.add(product);
         }
         ProductAdapter productAdapter = new ProductAdapter(items);
-        mRecyclerView.setAdapter(productAdapter);
+        mBinding.recyclerViewProducts.setAdapter(productAdapter);
     }
 
     private void initViews() {
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        mBinding.recyclerViewProducts.setLayoutManager(new LinearLayoutManager(
+                getActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false));
     }
 
-    private void findViews(View view) {
-        mRecyclerView = view.findViewById(R.id.recycler_view_products);
-    }
 }

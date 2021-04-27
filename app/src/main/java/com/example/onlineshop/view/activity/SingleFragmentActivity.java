@@ -1,15 +1,19 @@
-package com.example.onlineshop.activity;
+package com.example.onlineshop.view.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.onlineshop.R;
+import com.example.onlineshop.databinding.ActivityFragmentBinding;
 
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
+
+    private ActivityFragmentBinding mBinding;
 
     public abstract Fragment createFragment();
 
@@ -18,7 +22,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //inflate layout for activity
-        setContentView(R.layout.activity_fragment);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_fragment);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 

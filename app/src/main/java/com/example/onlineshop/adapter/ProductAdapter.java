@@ -8,9 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
+import com.example.onlineshop.databinding.ProductItemBinding;
 import com.example.onlineshop.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -36,9 +38,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     @NonNull
     @Override
     public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.product_item, parent, false);
-        return new ProductHolder(view);
+
+        ProductItemBinding binding = DataBindingUtil. inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.product_item,
+                parent,
+                false);
+        return new ProductHolder(binding);
     }
 
     @Override
@@ -54,21 +60,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     public class ProductHolder extends RecyclerView.ViewHolder {
 
-        private ImageView mPhotoProduct;
-        private TextView mNameProduct;
-        private TextView mPriceProduct;
-        public ProductHolder(@NonNull View itemView) {
-            super(itemView);
-            mPhotoProduct = itemView.findViewById(R.id.img_view_product);
-            mNameProduct = itemView.findViewById(R.id.txt_view_name_product);
-            mPriceProduct = itemView.findViewById(R.id.txt_view_price_product);
+        private ProductItemBinding mProductItemBinding;
+
+
+        public ProductHolder(ProductItemBinding productItemBinding) {
+            super(productItemBinding.getRoot());
+
+            mProductItemBinding = productItemBinding;
         }
 
         public void bind(Product product){
             Picasso.get()
                     .load(product.getUrl())
                     .placeholder(R.drawable.place_holder)
-                    .into(mPhotoProduct);
+                    .into(mProductItemBinding.imgViewProduct);
         }
     }
 }
