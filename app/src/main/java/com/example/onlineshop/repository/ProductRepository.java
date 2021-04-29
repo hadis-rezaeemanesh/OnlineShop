@@ -2,6 +2,8 @@ package com.example.onlineshop.repository;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.onlineshop.Network.NetworkParams;
 import com.example.onlineshop.Network.retrofit.OnlineShopService;
 import com.example.onlineshop.Network.retrofit.RetrofitInstance;
@@ -19,7 +21,11 @@ public class ProductRepository {
     private static final String TAG = "ProductRepository";
     private OnlineShopService mService;
     private static ProductRepository sInstance;
+    private MutableLiveData<List<Product>> mListProductLiveData = new MutableLiveData<>();
 
+    public MutableLiveData<List<Product>> getListProductLiveData() {
+        return mListProductLiveData;
+    }
 
     public static ProductRepository getInstance(){
         if (sInstance == null)
@@ -32,13 +38,13 @@ public class ProductRepository {
         mService = retrofit.create(OnlineShopService.class);
     }
 
-    public void fetchItemsAsync(Callbacks callbacks){
+    public void fetchItemsAsync(){
         Call<List<Product>> call = mService.listItems(NetworkParams.options);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 List<Product> items = response.body();
-                callbacks.onItemResponse(items);
+                mListProductLiveData.setValue(items);
             }
 
             @Override
@@ -49,7 +55,7 @@ public class ProductRepository {
 
     }
 
-    public interface Callbacks {
+   /* public interface Callbacks {
         void onItemResponse(List<Product> items);
-    }
+    }*/
 }

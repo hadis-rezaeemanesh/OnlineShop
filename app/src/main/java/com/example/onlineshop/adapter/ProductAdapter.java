@@ -31,7 +31,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         mProducts = products;
     }
 
-    public ProductAdapter(List<Product> products) {
+    public ProductAdapter(Context context, List<Product> products) {
+        mContext = context;
         mProducts = products;
     }
 
@@ -40,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         ProductItemBinding binding = DataBindingUtil. inflate(
-                LayoutInflater.from(parent.getContext()),
+                LayoutInflater.from(mContext),
                 R.layout.product_item,
                 parent,
                 false);

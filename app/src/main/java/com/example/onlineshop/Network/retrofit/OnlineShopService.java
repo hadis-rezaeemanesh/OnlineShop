@@ -12,7 +12,7 @@ import retrofit2.http.QueryMap;
 
 public interface OnlineShopService {
 
-    @GET("products?")
+    @GET("products/")
     Call<List<Product>> listItems(@QueryMap Map<String, String> options);
 
 }

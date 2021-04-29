@@ -18,7 +18,7 @@ public class MainActivity extends SingleFragmentActivity {
 
     @Override
     public Fragment createFragment() {
-        return ToolbarFragment.newInstance();
+        return ProductListFragment.newInstance();
     }
 
 }
