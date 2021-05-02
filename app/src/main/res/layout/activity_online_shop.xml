@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="productViewModel"
+            type="com.example.onlineshop.viewModel.ProductViewModel" />
+
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ProductItemBinding;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.viewModel.ProductViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,19 +22,12 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
 
     private Context mContext;
-    private List<Product> mProducts;
+    private ProductViewModel mProductViewModel;
 
-    public List<Product> getProducts() {
-        return mProducts;
-    }
 
-    public void setProducts(List<Product> products) {
-        mProducts = products;
-    }
-
-    public ProductAdapter(Context context, List<Product> products) {
+    public ProductAdapter(Context context, ProductViewModel productViewModel) {
         mContext = context;
-        mProducts = products;
+        mProductViewModel = productViewModel;
     }
 
     @NonNull
@@ -50,16 +44,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
-        Product product = mProducts.get(position);
-        holder.bind(product);
+        Product product = mProductViewModel.getCurrentItems().get(position);
+        holder.bind(position, product);
     }
 
     @Override
     public int getItemCount() {
-        return mProducts.size();
+        return mProductViewModel.getCurrentItems().size();
     }
 
-    public class ProductHolder extends RecyclerView.ViewHolder {
+     class ProductHolder extends RecyclerView.ViewHolder {
 
         private ProductItemBinding mProductItemBinding;
 
@@ -68,9 +62,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
             super(productItemBinding.getRoot());
 
             mProductItemBinding = productItemBinding;
+            mProductItemBinding.setProductViewModel(mProductViewModel);
         }
 
-        public void bind(Product product){
+        public void bind(int position, Product product){
+            mProductItemBinding.setPosition(position);
+
             Picasso.get()
                     .load(product.getUrl())
                     .placeholder(R.drawable.place_holder)
