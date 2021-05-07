@@ -3,10 +3,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="popular_product">بهترین محصولات</string>
+    <string name="rated_product">بهترین محصولات</string>
     <string name="newest_product">جدیدترین محصولات</string>
-    <string name="recent_product">پربازدیدترین محصولات</string>
+    <string name="visited_product">پربازدیدترین محصولات</string>
 
     <string name="product_item_price">تومان</string>
     <string name="item_category_kala"> کالا </string>
+    <string name="menu_most_sells">پرفروش ترین محصولات</string>
+    <string name="menu_popular">پربازدیدترین محصولات</string>
+    <string name="menu_newest">جدیدترین محصولات</string>
+    <string name="menu_home">خانه</string>
 </resources>

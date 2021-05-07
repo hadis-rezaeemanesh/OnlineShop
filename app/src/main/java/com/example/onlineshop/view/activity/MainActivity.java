@@ -25,4 +25,5 @@ public class MainActivity extends SingleFragmentActivity {
         return CategoryFragment.newInstance();
     }
 
+
 }

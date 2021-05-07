@@ -13,16 +13,16 @@ import android.view.ViewGroup;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ActivityOnlineShopBinding;
 import com.example.onlineshop.databinding.FragmentToolbarBinding;
+import com.example.onlineshop.view.activity.HomePageActivity;
 
 public class ToolbarFragment extends Fragment {
 
-    private ActivityOnlineShopBinding mBinding;
-    private FragmentToolbarBinding mToolbarBinding;
+    private FragmentToolbarBinding mBinding;
 
     public ToolbarFragment() {
         // Required empty public constructor
     }
-    // TODO: Rename and change types and number of parameters
+
     public static ToolbarFragment newInstance() {
         ToolbarFragment fragment = new ToolbarFragment();
         Bundle args = new Bundle();
@@ -40,7 +40,7 @@ public class ToolbarFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(
-                inflater, R.layout.activity_online_shop, container, false);
+                inflater, R.layout.fragment_toolbar, container, false);
 
 
 
@@ -49,12 +49,12 @@ public class ToolbarFragment extends Fragment {
     }
 
     private void setListeners() {
-        mToolbarBinding.menuBtn.setOnClickListener(new View.OnClickListener() {
+        mBinding.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (getActivity() instanceof MainActivity){
-//                    mBinding.drawerLayout.openDrawer(Gravity.RIGHT);
-//                }
+                if (getActivity()instanceof HomePageActivity){
+                    ((HomePageActivity) getActivity()).openNavigationView();
+                }
             }
         });
 

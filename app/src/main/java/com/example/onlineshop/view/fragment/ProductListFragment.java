@@ -55,7 +55,7 @@ public class ProductListFragment extends Fragment {
         stateList = getArguments().getInt(ARGS_LIST_STATE);
 
         mProductViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        mProductViewModel.fetchProductsAsync(page);
+        mProductViewModel.fetchProductsAsync();
         mProductViewModel.getListProductLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
@@ -77,7 +77,7 @@ public class ProductListFragment extends Fragment {
     }
 
     private void setAdapters(List<Product> items) {
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), mProductViewModel);
+        ProductAdapter productAdapter = new ProductAdapter(getContext(), items);
         mBinding.recyclerViewProducts.setAdapter(productAdapter);
     }
 
@@ -99,7 +99,7 @@ public class ProductListFragment extends Fragment {
                 if (page <= mProductViewModel.getPageCount().getValue() &&
                         mProductViewModel.getListProductLiveData().getValue().size() == 10)
 
-                    mProductViewModel.fetchProductsAsync(++page);
+                    mProductViewModel.fetchProductsAsync();
             }
         });
     }

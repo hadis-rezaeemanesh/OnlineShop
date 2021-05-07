@@ -46,7 +46,7 @@ public class CategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mCategoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        mCategoryViewModel.fetchListCategory(page);
+        mCategoryViewModel.fetchListCategory();
         mCategoryViewModel.getListCategoryLiveData().observe(
                 this, new Observer<List<Category>>() {
             @Override
@@ -76,7 +76,7 @@ public class CategoryFragment extends Fragment {
                 if (recyclerView.canScrollHorizontally(1) &&
                         newState == RecyclerView.SCROLL_STATE_IDLE) {
                     if (page <= mCategoryViewModel.getPageCount().getValue())
-                        mCategoryViewModel.fetchListCategory(++page);
+                        mCategoryViewModel.fetchListCategory();
                 }
             }
 
@@ -100,7 +100,7 @@ public class CategoryFragment extends Fragment {
     }
 
     private void setAdapters(List<Category> items) {
-        CategoryAdapter adapter = new CategoryAdapter(mCategoryViewModel);
+        CategoryAdapter adapter = new CategoryAdapter(getContext(), items);
         mBinding.recyclerViewCategoryList.setAdapter(adapter);
     }
 }

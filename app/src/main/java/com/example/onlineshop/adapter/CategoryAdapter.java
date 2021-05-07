@@ -1,6 +1,7 @@
 package com.example.onlineshop.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,35 +19,39 @@ import com.example.onlineshop.model.Product;
 import com.example.onlineshop.viewModel.CategoryViewModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryHolder> {
     private CategoryViewModel mCategoryViewModel;
     private Context mContext;
+    private List<Category> mItems;
+    private static final String TAG = "categoryAdapter";
 
-    public CategoryAdapter(CategoryViewModel categoryViewModel) {
-        mCategoryViewModel = categoryViewModel;
+    public CategoryAdapter(Context context, List<Category> items) {
+        mContext = context;
+        mItems = items;
 
     }
 
     @NonNull
     @Override
     public CategoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CategoryHolder(DataBindingUtil.inflate(
-                LayoutInflater.from(mCategoryViewModel.getApplication()),
+        CategoryItemBinding binding = DataBindingUtil.inflate( LayoutInflater.from(mContext),
                 R.layout.category_item,
                 parent,
-                false));
+                false);
+        return new CategoryHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoryHolder holder, int position) {
-        Category item = mCategoryViewModel.getCurrentCategories().get(position);
-        holder.bind(position, item);
+        holder.bind(mItems.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mItems.size();
     }
 
     class CategoryHolder extends RecyclerView.ViewHolder {
@@ -54,11 +59,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         public CategoryHolder(CategoryItemBinding itemBinding) {
             super(itemBinding.getRoot());
             mItemBinding = itemBinding;
-            itemBinding.setCategoryViewModel(mCategoryViewModel);
         }
 
-        public void bind(int position, Category item){
-            mItemBinding.setPosition(position);
+        public void bind(Category item){
+
+            mItemBinding.txtViewCount.setText(item.getCount() + " کالا ");
+            Log.d(TAG, "bind: " + item.getCount());
+
+            mItemBinding.txtViewNameCategory.setText(item.getName());
 
             Picasso.get()
                     .load(item.getImage())

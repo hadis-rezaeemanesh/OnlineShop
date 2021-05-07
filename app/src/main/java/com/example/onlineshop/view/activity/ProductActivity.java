@@ -1,23 +1,18 @@
-package com.example.onlineshop;
+package com.example.onlineshop.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ActivityOnlineShopBinding;
-import com.example.onlineshop.model.Product;
 import com.example.onlineshop.view.fragment.ProductListFragment;
 import com.example.onlineshop.viewModel.ProductViewModel;
-
-import java.util.List;
-import java.util.Observable;
 
 public class ProductActivity extends AppCompatActivity {
 

@@ -14,12 +14,29 @@ import com.example.onlineshop.repository.ProductRepository;
 
 import java.util.List;
 
-public class ProductViewModel extends AndroidViewModel {
+public class ProductViewModel extends ViewModel {
     public static final String TAG = "productViewModel";
     private ProductRepository mProductRepository;
-    private LiveData<List<Product>> mListProductLiveData;
+    private final LiveData<List<Product>> mListProductLiveData;
 
     private MutableLiveData<Boolean> mOpenLiveData = new MutableLiveData<>();
+    private LiveData<List<Product>> mNewestProductsLiveData;
+    private LiveData<List<Product>> mRatedProductsLiveData;
+    private LiveData<List<Product>> mVisitedProductsLiveData;
+
+
+    public LiveData<List<Product>> getNewestProductsLiveData() {
+        return mNewestProductsLiveData;
+    }
+
+    public LiveData<List<Product>> getRatedProductsLiveData() {
+        return mRatedProductsLiveData;
+    }
+
+    public LiveData<List<Product>> getVisitedProductsLiveData() {
+        return mVisitedProductsLiveData;
+    }
+
 
     private LiveData<Integer> mPageCount;
     private LiveData<Integer> mCategoryItemId;
@@ -41,21 +58,34 @@ public class ProductViewModel extends AndroidViewModel {
         return mOpenLiveData;
     }
 
-    public ProductViewModel(@NonNull Application application) {
-        super(application);
-
+    public ProductViewModel() {
         mProductRepository = ProductRepository.getInstance();
         mListProductLiveData = mProductRepository.getListProductLiveData();
         mPageCount = mProductRepository.getPageCount();
         mCategoryItemId = mProductRepository.getCategoryItemId();
+        mNewestProductsLiveData = mProductRepository.getNewestProductsLiveData();
+        mRatedProductsLiveData = mProductRepository.getRatedProductsLiveData();
+        mVisitedProductsLiveData = mProductRepository.getVisitedProductsLiveData();
     }
 
     public List<Product> getCurrentItems() {
         return mListProductLiveData.getValue();
     }
 
-    public void fetchProductsAsync(int page){
+    public void fetchProductsAsync(){
         Log.d(TAG, "fetchProductsAsync: ");
-        mProductRepository.fetchProductsAsync(page, mCategoryItemId.getValue() );
+        mProductRepository.fetchProductsAsync();
+    }
+
+    public void fetchNewestProducts(){
+        mProductRepository.fetchNewestProductsList();
+    }
+
+    public void fetchRatedProducts(){
+        mProductRepository.fetchRatedProductsList();
+    }
+
+    public void fetchVisitedProducts(){
+        mProductRepository.fetchVisitedProductsList();
     }
 }

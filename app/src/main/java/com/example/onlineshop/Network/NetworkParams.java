@@ -1,9 +1,13 @@
 package com.example.onlineshop.Network;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class NetworkParams {
+
+    public static final String TAG = "networkParams";
 
     public static final String BASE_URL = "https://woocommerce.maktabsharif.ir/wp-json/wc/v3/";
     public static final String CONSUMER_KEY = "ck_1a8895c40ccaf51ca20c335651ca1341b570232d";
@@ -16,19 +20,43 @@ public class NetworkParams {
     }};
 
 
-    public static Map<String, String> getProductsOptions(int page, int categoryId) {
+    public static Map<String, String> getProductsOptions() {
         Map<String, String> productOptions = new HashMap<>();
         productOptions.putAll(options);
-        productOptions.put("page", String.valueOf(page));
-        productOptions.put("category", String.valueOf(categoryId));
+        productOptions.put("per_page", "100" );
         return productOptions;
     }
 
-    public static Map<String, String> getCategoryOptions(int page) {
+    public static Map<String, String> getCategoryOptions() {
         Map<String, String> categoryOptions = new HashMap<>();
         categoryOptions.putAll(options);
-        categoryOptions.put("page", String.valueOf(page));
+        categoryOptions.put("per_page", "100");
         return categoryOptions;
+    }
+
+    public static Map<String, String > getNewestProducts(){
+        Log.d(TAG, "getNewestProducts: ");
+        Map<String , String > productsOptions = new HashMap<>();
+        productsOptions.putAll(options);
+        productsOptions.put("orderby", "date");
+        productsOptions.put("per_page", "10");
+        return productsOptions;
+    }
+
+    public static Map<String, String > getRatedProducts(){
+        Map<String , String > productsOptions = new HashMap<>();
+        productsOptions.putAll(options);
+        productsOptions.put("orderby", "rating");
+        productsOptions.put("per_page", "10");
+        return productsOptions;
+    }
+
+    public static Map<String, String > getVisitedProducts(){
+        Map<String , String > productsOptions = new HashMap<>();
+        productsOptions.putAll(options);
+        productsOptions.put("orderby", "popularity");
+        productsOptions.put("per_page", "10");
+        return productsOptions;
     }
 
 

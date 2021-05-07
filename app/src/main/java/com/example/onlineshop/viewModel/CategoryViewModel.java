@@ -1,6 +1,7 @@
 package com.example.onlineshop.viewModel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -14,7 +15,9 @@ import com.example.onlineshop.view.fragment.ProductListFragment;
 
 import java.util.List;
 
-public class CategoryViewModel extends AndroidViewModel {
+public class CategoryViewModel extends ViewModel {
+
+    private static final String TAG = "categoryViewModel";
     private ProductRepository mProductRepository;
     private LiveData<List<Category>> mListCategoryLiveData;
 
@@ -33,9 +36,7 @@ public class CategoryViewModel extends AndroidViewModel {
         return mListCategoryLiveData;
     }
 
-    public CategoryViewModel(@NonNull Application application) {
-        super(application);
-
+    public CategoryViewModel() {
         mProductRepository = ProductRepository.getInstance();
         mListCategoryLiveData = mProductRepository.getListCategoryLiveData();
         mPageCount = mProductRepository.getPageCount();
@@ -47,14 +48,16 @@ public class CategoryViewModel extends AndroidViewModel {
     }
 
 
-    public void fetchListCategory(int page){
-        mProductRepository.fetchCategoriesAsync(page);
+    public void fetchListCategory(){
+        Log.d(TAG, "fetchListCategory: " );
+
+        mProductRepository.fetchCategoriesAsync();
 
     }
 
     public void onClickListItem(int position) {
         Category item = mListCategoryLiveData.getValue().get(position);
-        mProductRepository.fetchProductsAsync(1, item.getId());
+        mProductRepository.fetchProductsAsync();
 //        MainActivity.start(getApplication(), item.getName());
     }
 }

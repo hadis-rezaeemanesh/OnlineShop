@@ -1,6 +1,7 @@
 package com.example.onlineshop.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +22,16 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
 
+    private static final String TAG = "ProductAdapter";
+
     private Context mContext;
+    private List<Product> mItems;
     private ProductViewModel mProductViewModel;
 
 
-    public ProductAdapter(Context context, ProductViewModel productViewModel) {
+    public ProductAdapter(Context context, List<Product> items) {
         mContext = context;
-        mProductViewModel = productViewModel;
+        mItems = items;
     }
 
     @NonNull
@@ -44,13 +48,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
-        Product product = mProductViewModel.getCurrentItems().get(position);
-        holder.bind(position, product);
+
+        holder.bind(mItems.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mProductViewModel.getCurrentItems().size();
+        return mItems.size();
     }
 
      class ProductHolder extends RecyclerView.ViewHolder {
@@ -62,11 +66,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
             super(productItemBinding.getRoot());
 
             mProductItemBinding = productItemBinding;
-            mProductItemBinding.setProductViewModel(mProductViewModel);
         }
 
-        public void bind(int position, Product product){
-            mProductItemBinding.setPosition(position);
+        public void bind(Product product){
+            Log.d(TAG, "bind: " + product.getName());
 
             Picasso.get()
                     .load(product.getUrl())
