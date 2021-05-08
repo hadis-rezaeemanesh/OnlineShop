@@ -34,29 +34,35 @@ public class NetworkParams {
         return categoryOptions;
     }
 
-    public static Map<String, String > getNewestProducts(){
+    public static Map<String, String > getNewestProducts(int perPage){
         Log.d(TAG, "getNewestProducts: ");
         Map<String , String > productsOptions = new HashMap<>();
         productsOptions.putAll(options);
         productsOptions.put("orderby", "date");
-        productsOptions.put("per_page", "10");
+        productsOptions.put("per_page", String.valueOf(perPage));
         return productsOptions;
     }
 
-    public static Map<String, String > getRatedProducts(){
+    public static Map<String, String > getRatedProducts(int perPage){
         Map<String , String > productsOptions = new HashMap<>();
         productsOptions.putAll(options);
         productsOptions.put("orderby", "rating");
-        productsOptions.put("per_page", "10");
+        productsOptions.put("per_page", String.valueOf(perPage));
         return productsOptions;
     }
 
-    public static Map<String, String > getVisitedProducts(){
+    public static Map<String, String > getVisitedProducts(int perPage){
         Map<String , String > productsOptions = new HashMap<>();
         productsOptions.putAll(options);
         productsOptions.put("orderby", "popularity");
-        productsOptions.put("per_page", "10");
+        productsOptions.put("per_page", String.valueOf(perPage));
         return productsOptions;
+    }
+
+    public static Map<String, String> getTotalProductsOptions() {
+        Map<String, String> totalOptions = new HashMap<>();
+        totalOptions.putAll(options);
+        return totalOptions;
     }
 
 

@@ -77,7 +77,7 @@ public class ProductListFragment extends Fragment {
     }
 
     private void setAdapters(List<Product> items) {
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), items);
+        ProductAdapter productAdapter = new ProductAdapter(mProductViewModel, items);
         mBinding.recyclerViewProducts.setAdapter(productAdapter);
     }
 

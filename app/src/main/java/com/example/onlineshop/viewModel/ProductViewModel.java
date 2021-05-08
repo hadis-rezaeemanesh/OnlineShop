@@ -14,16 +14,23 @@ import com.example.onlineshop.repository.ProductRepository;
 
 import java.util.List;
 
-public class ProductViewModel extends ViewModel {
+public class ProductViewModel extends AndroidViewModel {
     public static final String TAG = "productViewModel";
     private ProductRepository mProductRepository;
     private final LiveData<List<Product>> mListProductLiveData;
+    private final LiveData<List<Product>> mNewestProductsLiveData;
+    private final LiveData<List<Product>> mRatedProductsLiveData;
+    private final LiveData<List<Product>> mVisitedProductsLiveData;
 
     private MutableLiveData<Boolean> mOpenLiveData = new MutableLiveData<>();
-    private LiveData<List<Product>> mNewestProductsLiveData;
-    private LiveData<List<Product>> mRatedProductsLiveData;
-    private LiveData<List<Product>> mVisitedProductsLiveData;
 
+    private final LiveData<Integer> mPageCount;
+    private final LiveData<Integer> mCategoryItemId;
+    private final LiveData<Integer> mPerPage;
+
+    public LiveData<Integer> getPerPage() {
+        return mPerPage;
+    }
 
     public LiveData<List<Product>> getNewestProductsLiveData() {
         return mNewestProductsLiveData;
@@ -36,10 +43,6 @@ public class ProductViewModel extends ViewModel {
     public LiveData<List<Product>> getVisitedProductsLiveData() {
         return mVisitedProductsLiveData;
     }
-
-
-    private LiveData<Integer> mPageCount;
-    private LiveData<Integer> mCategoryItemId;
 
 
     public LiveData<List<Product>> getListProductLiveData() {
@@ -58,7 +61,9 @@ public class ProductViewModel extends ViewModel {
         return mOpenLiveData;
     }
 
-    public ProductViewModel() {
+    public ProductViewModel(@NonNull Application application) {
+        super(application);
+
         mProductRepository = ProductRepository.getInstance();
         mListProductLiveData = mProductRepository.getListProductLiveData();
         mPageCount = mProductRepository.getPageCount();
@@ -66,6 +71,22 @@ public class ProductViewModel extends ViewModel {
         mNewestProductsLiveData = mProductRepository.getNewestProductsLiveData();
         mRatedProductsLiveData = mProductRepository.getRatedProductsLiveData();
         mVisitedProductsLiveData = mProductRepository.getVisitedProductsLiveData();
+        mPerPage = mProductRepository.getPerPage();
+    }
+
+   /* public ProductViewModel() {
+        mProductRepository = ProductRepository.getInstance();
+        mListProductLiveData = mProductRepository.getListProductLiveData();
+        mPageCount = mProductRepository.getPageCount();
+        mCategoryItemId = mProductRepository.getCategoryItemId();
+        mNewestProductsLiveData = mProductRepository.getNewestProductsLiveData();
+        mRatedProductsLiveData = mProductRepository.getRatedProductsLiveData();
+        mVisitedProductsLiveData = mProductRepository.getVisitedProductsLiveData();
+    }*/
+
+    public void openDrawer() {
+        mOpenLiveData.setValue(true);
+        Log.d(TAG, "open drawer from view model called");
     }
 
     public List<Product> getCurrentItems() {
@@ -77,15 +98,19 @@ public class ProductViewModel extends ViewModel {
         mProductRepository.fetchProductsAsync();
     }
 
-    public void fetchNewestProducts(){
-        mProductRepository.fetchNewestProductsList();
+    public void fetchTotalProducts(){
+        mProductRepository.fetchTotalProducts();
     }
 
-    public void fetchRatedProducts(){
-        mProductRepository.fetchRatedProductsList();
+    public void fetchNewestProducts(int perPage){
+        mProductRepository.fetchNewestProductsList(perPage);
     }
 
-    public void fetchVisitedProducts(){
-        mProductRepository.fetchVisitedProductsList();
+    public void fetchRatedProducts(int perPage){
+        mProductRepository.fetchRatedProductsList(perPage);
+    }
+
+    public void fetchVisitedProducts(int perPage){
+        mProductRepository.fetchVisitedProductsList(perPage);
     }
 }

@@ -5,9 +5,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,36 +49,33 @@ public class HomePageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       /*    mViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        mViewModel.fetchListCategory();
-        mViewModel.getListCategoryLiveData().observe(this, new Observer<List<Category>>() {
-            @Override
-            public void onChanged(List<Category> categories) {
-                setupAdapter(categories);
+           mViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+           mViewModel.fetchTotalProducts();
+           mViewModel.getPerPage().observe(this, new Observer<Integer>() {
+               @Override
+               public void onChanged(Integer integer) {
+                   mViewModel.fetchNewestProducts(integer);
+                   mViewModel.fetchRatedProducts(integer);
+                   mViewModel.fetchVisitedProducts(integer);
+               }
+           });
 
-            }
-        });*/
-
-        mViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        mViewModel.fetchNewestProducts();
         mViewModel.getNewestProductsLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                setupAdapter(products);
+                setupAdapter(mViewModel.getNewestProductsLiveData(), mBinding.recyclerProductsNewest);
             }
         });
-        mViewModel.fetchRatedProducts();
         mViewModel.getRatedProductsLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                setupAdapter(products);
+                setupAdapter(mViewModel.getRatedProductsLiveData(), mBinding.recyclerProductsRated);
             }
         });
-        mViewModel.fetchVisitedProducts();
         mViewModel.getVisitedProductsLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                setupAdapter(products);
+                setupAdapter(mViewModel.getVisitedProductsLiveData(), mBinding.recyclerProductsVisited);
             }
         });
     }
@@ -114,11 +113,12 @@ public class HomePageFragment extends Fragment {
         ));
     }
 
-    private void setupAdapter(List<Product> items) {
-        ProductAdapter adapter = new ProductAdapter(getContext(),items);
-        mBinding.recyclerProductsNewest.setAdapter(adapter);
+    private void setupAdapter(LiveData<List<Product>> listLiveData, RecyclerView recyclerView) {
+        ProductAdapter adapter = new ProductAdapter(mViewModel, listLiveData.getValue());
+        recyclerView.setAdapter(adapter);
+        /*mBinding.recyclerProductsNewest.setAdapter(adapter);
         mBinding.recyclerProductsRated.setAdapter(adapter);
-        mBinding.recyclerProductsVisited.setAdapter(adapter);
+        mBinding.recyclerProductsVisited.setAdapter(adapter);*/
 
 
     }

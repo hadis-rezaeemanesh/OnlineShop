@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragment.ProductDetailFragment"
+    android:padding="16dp">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/product_detail_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/share_detail_product"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/product_detail_view_pager"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_share"/>
+    <ImageButton
+        android:id="@+id/like_detail_product"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/product_detail_view_pager"
+        app:layout_constraintStart_toEndOf="@id/share_detail_product"
+        android:src="@drawable/ic_like"/>
+    <ImageButton
+        android:id="@+id/notify_detail_product"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/product_detail_view_pager"
+        app:layout_constraintStart_toEndOf="@id/like_detail_product"
+        android:src="@drawable/ic_notify"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_detail_product_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notify_detail_product"
+        android:gravity="right"
+        android:layout_marginBottom="5dp"
+        android:textSize="16sp"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/barrier1"
+        app:constraint_referenced_ids="product_detail_product_name"
+        app:barrierDirection="bottom"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_detail_product_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrier1"
+        android:layout_marginTop="5dp"
+        android:gravity="right"
+        android:textSize="12sp"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/barrier2"
+        app:constraint_referenced_ids="product_detail_product_description"
+        app:barrierDirection="bottom"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/comment_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="4dp"
+        android:layout_weight="0.5"
+        android:textSize="10dp"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_comment"
+        app:iconGravity="textStart"
+        app:iconSize="20dp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        android:text="نظرات کاربران"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier2"
+        app:layout_constraintEnd_toStartOf="@id/detail_product"
+        app:rippleColor="@android:color/darker_gray" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_product"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="0.5"
+        android:text="مشخصات"
+        android:textSize="10dp"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_detail"
+        app:layout_constraintStart_toEndOf="@id/comment_content"
+        app:layout_constraintTop_toBottomOf="@+id/barrier2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:iconGravity="textStart"
+        app:iconSize="20dp"
+        app:rippleColor="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/guarantee_product_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10.0dip"
+        android:gravity="right"
+        android:padding="7.0dip"
+        android:text="گارانتی اصالت و سلامت فیزیکی کالا"
+        android:drawableRight="@drawable/ic_guarantee"
+        android:textSize="13.0sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_product" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="1.0dip"
+        android:layout_marginTop="5.0dip"
+        android:layout_marginBottom="5.0dip"
+        app:layout_constraintTop_toBottomOf="@id/guarantee_product_detail"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/truck_product_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:drawableRight="@drawable/ic_truck"
+        android:drawablePadding="10.0dip"
+        android:gravity="right"
+        android:padding="7.0dip"
+        android:text="آماده ارسال از انبار دیجی کالا"
+        android:textSize="13.0sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/view1"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="1.0dip"
+        android:layout_marginTop="10.0dip"
+        android:layout_marginBottom="10.0dip"
+        app:layout_constraintTop_toBottomOf="@id/truck_product_detail"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/toman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="تومان"
+        app:layout_constraintTop_toBottomOf="@id/view2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20.0sp" />
+
+    <TextView
+        android:id="@+id/Price_product_Detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20.0sp"
+        app:layout_constraintTop_toBottomOf="@id/view2"
+        app:layout_constraintStart_toEndOf="@id/toman"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buy_button_product_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_weight="0.5"
+        android:text="افزودن به سبد خرید"
+        android:textSize="15sp"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_add_to_shopping_cart_product_detail"
+        app:iconGravity="textStart"
+        app:iconSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toman"
+        app:rippleColor="@android:color/darker_gray" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,7 @@ public class ProductRepository {
 
     private MutableLiveData<Integer> mPageCount = new MutableLiveData<>();
     private MutableLiveData<Integer> mCategoryItemId = new MutableLiveData<>();
+    private MutableLiveData<Integer> mPerPage = new MutableLiveData<>();
 
     public MutableLiveData<List<Product>> getListProductLiveData() {
         return mListProductLiveData;
@@ -70,6 +71,10 @@ public class ProductRepository {
         return mCategoryItemId;
     }
 
+    public MutableLiveData<Integer> getPerPage() {
+        return mPerPage;
+    }
+
     public static ProductRepository getInstance(){
         if (sInstance == null)
             sInstance = new ProductRepository();
@@ -82,7 +87,6 @@ public class ProductRepository {
     }
 
     public void fetchProductsAsync(){
-
 
         Call<List<Product>> call = mProductService.listProductItems(
                 NetworkParams.getProductsOptions());
@@ -111,19 +115,36 @@ public class ProductRepository {
                 List<Category> items = response.body();
                 mListCategoryLiveData.setValue(items);
             }
-
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
                 Log.e(TAG, t.getMessage(), t);
             }
         });
-
     }
 
-    public void fetchNewestProductsList(){
+    public void fetchTotalProducts() {
+        Call<List<Product>> call = mProductService.listProductItems(
+                NetworkParams.getTotalProductsOptions());
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                Headers headerList = response.headers();
+                for (int i = 0; i < headerList.size(); i++) {
+                    int perPage = Integer.parseInt(headerList.get("X-WP-Total"));
+                    mPerPage.setValue(perPage);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.e(TAG, t.getMessage(), t);
+            }
+        });
+    }
+
+    public void fetchNewestProductsList(int perPage){
 
         Call<List<Product>> call =
-                mProductService.listProductItems(NetworkParams.getNewestProducts());
+                mProductService.listProductItems(NetworkParams.getNewestProducts(perPage));
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -140,9 +161,9 @@ public class ProductRepository {
         });
     }
 
-    public void fetchRatedProductsList(){
+    public void fetchRatedProductsList(int perPage){
         Call<List<Product>> call =
-                mProductService.listProductItems(NetworkParams.getRatedProducts());
+                mProductService.listProductItems(NetworkParams.getRatedProducts(perPage));
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -158,9 +179,9 @@ public class ProductRepository {
         });
     }
 
-    public void fetchVisitedProductsList(){
+    public void fetchVisitedProductsList(int perPage){
         Call<List<Product>> call =
-                mProductService.listProductItems(NetworkParams.getVisitedProducts());
+                mProductService.listProductItems(NetworkParams.getVisitedProducts(perPage));
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
