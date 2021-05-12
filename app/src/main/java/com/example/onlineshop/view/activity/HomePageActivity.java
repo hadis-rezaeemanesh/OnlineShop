@@ -24,6 +24,7 @@ import com.example.onlineshop.view.fragment.HomePageFragment;
 import com.example.onlineshop.view.fragment.ProductListFragment;
 import com.example.onlineshop.view.fragment.ToolbarFragment;
 import com.example.onlineshop.viewModel.CategoryViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
@@ -46,27 +47,18 @@ public class HomePageActivity extends SingleFragmentActivity {
 
         addFragment();
 
-     /*   mBinding.navigationView.setNavigationItemSelectedListener(
+      /*  mBinding.navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.menu_home:
+                    case R.id.home_menu:
                         addFragment();
                         Log.d(TAG, "Home navigation");
                         break;
-                    case R.id.menu_newest:
+                    case R.id.category_menu:
                         addFragment();
-                        Log.d(TAG, "newest list clicked");
-                        break;
-                    case R.id.menu_popular:
-                        //Todo:
-                        addFragment();
-                        Log.d(TAG, "popular list clicked");
-                        break;
-                    case R.id.menu_most_sells:
-                        //ToDo:
-                        addFragment();
+                        Log.d(TAG, "category list clicked");
                         break;
                 }
                 mBinding.drawerLayout.closeDrawers();
@@ -87,4 +79,7 @@ public class HomePageActivity extends SingleFragmentActivity {
                 .replace(R.id.toolbar_container, ToolbarFragment.newInstance())
                 .commit();
     }
+
+
+
 }

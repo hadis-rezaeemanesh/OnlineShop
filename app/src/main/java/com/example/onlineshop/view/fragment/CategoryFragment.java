@@ -18,9 +18,7 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.CategoryAdapter;
 import com.example.onlineshop.databinding.FragmentCategoryBinding;
 import com.example.onlineshop.model.Category;
-import com.example.onlineshop.model.Product;
 import com.example.onlineshop.viewModel.CategoryViewModel;
-import com.example.onlineshop.viewModel.ProductViewModel;
 
 import java.util.List;
 
@@ -46,7 +44,7 @@ public class CategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mCategoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        mCategoryViewModel.fetchListCategory();
+        mCategoryViewModel.fetchListCategory(page);
         mCategoryViewModel.getListCategoryLiveData().observe(
                 this, new Observer<List<Category>>() {
             @Override
@@ -76,7 +74,7 @@ public class CategoryFragment extends Fragment {
                 if (recyclerView.canScrollHorizontally(1) &&
                         newState == RecyclerView.SCROLL_STATE_IDLE) {
                     if (page <= mCategoryViewModel.getPageCount().getValue())
-                        mCategoryViewModel.fetchListCategory();
+                        mCategoryViewModel.fetchListCategory(page);
                 }
             }
 

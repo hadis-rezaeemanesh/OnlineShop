@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.onlineshop.Network.NetworkParams;
-import com.example.onlineshop.Network.retrofit.OnlineShopService;
+import com.example.onlineshop.Network.retrofit.ShopService;
 import com.example.onlineshop.Network.retrofit.RetrofitInstance;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Product;
@@ -17,15 +17,14 @@ import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.http.Header;
 
 public class ProductRepository {
 
     private static final String TAG = "ProductRepository";
 
-    private OnlineShopService mProductService;
-    private OnlineShopService mCategoryService;
+    private ShopService mProductService;
+    private ShopService mCategoryService;
+    private ShopService mProductWithId;
 
     private static ProductRepository sInstance;
 
@@ -42,6 +41,17 @@ public class ProductRepository {
     private MutableLiveData<Integer> mPageCount = new MutableLiveData<>();
     private MutableLiveData<Integer> mCategoryItemId = new MutableLiveData<>();
     private MutableLiveData<Integer> mPerPage = new MutableLiveData<>();
+
+    private MutableLiveData<Product> mProductItemLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mRelatedItemsLiveData = new MutableLiveData<>();
+
+    public MutableLiveData<Product> getProductItemLiveData() {
+        return mProductItemLiveData;
+    }
+
+    public MutableLiveData<List<Product>> getRelatedItemsLiveData() {
+        return mRelatedItemsLiveData;
+    }
 
     public MutableLiveData<List<Product>> getListProductLiveData() {
         return mListProductLiveData;
@@ -82,20 +92,31 @@ public class ProductRepository {
     }
 
     private ProductRepository(){
-        mProductService = RetrofitInstance.getProductInstance().create(OnlineShopService.class);
-        mCategoryService = RetrofitInstance.getCategoryInstance().create(OnlineShopService.class);
+        mProductService = RetrofitInstance.getProductInstance().create(ShopService.class);
+        mCategoryService = RetrofitInstance.getCategoryInstance().create(ShopService.class);
+        mProductWithId = RetrofitInstance.getProductWithId().create(ShopService.class);
     }
 
-    public void fetchProductsAsync(){
+    public void fetchProductsAsync(int page, int idCategory){
+        if (page == 1)
+            mProducts = new ArrayList<>();
 
         Call<List<Product>> call = mProductService.listProductItems(
-                NetworkParams.getProductsOptions());
+                NetworkParams.getProductsOptions(page, idCategory));
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                Headers headerList = response.headers();
+                for (int i = 0; i < headerList.size(); i++) {
+                    int totalPage = Integer.parseInt(headerList.get("X-WP-TotalPages"));
+                    Log.e(TAG, "the total products" + totalPage);
+                    mPageCount.setValue(totalPage);
+                }
 
                 List<Product> items = response.body();
-                mListProductLiveData.setValue(mProducts);
+                mProducts.addAll(items);
+                mListProductLiveData.setValue(items);
+                mCategoryItemId.setValue(idCategory);
             }
 
             @Override
@@ -106,14 +127,21 @@ public class ProductRepository {
 
     }
 
-    public void fetchCategoriesAsync(){
+    public void fetchCategoriesAsync(int page){
         Call<List<Category>> call = mCategoryService.listCategoryItems(
-                NetworkParams.getCategoryOptions());
+                NetworkParams.getCategoryOptions(page));
         call.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                Headers headerList = response.headers();
+                for (int i = 0; i < headerList.size(); i++) {
+                    int totalPage = Integer.parseInt(headerList.get("X-WP-TotalPages"));
+
+                    mPageCount.setValue(totalPage);
+                }
                 List<Category> items = response.body();
-                mListCategoryLiveData.setValue(items);
+                mCategories.addAll(items);
+                mListCategoryLiveData.setValue(mCategories);
             }
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
@@ -195,6 +223,44 @@ public class ProductRepository {
 
             }
         });
+    }
+
+    public void fetchProductWithId(int id) {
+
+        Call<Product> call = mProductWithId.getProduct(
+                id, NetworkParams.getTotalProductsOptions());
+        call.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                mProductItemLiveData.setValue(response.body());
+            }
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                Log.e(TAG, t.getMessage(), t);
+            }
+        });
+    }
+
+    public void fetchRelatedProducts(List<Integer> relatedProductsId) {
+
+        List<Product> relatedItems = new ArrayList<>();
+        for (int i = 0; i < relatedProductsId.size(); i++) {
+            Call<Product> call = mProductWithId.getProduct(
+                    relatedProductsId.get(i), NetworkParams.getTotalProductsOptions());
+            call.enqueue(new Callback<Product>() {
+                @Override
+                public void onResponse(Call<Product> call, Response<Product> response) {
+                    relatedItems.add(response.body());
+                    Log.e(TAG, "related item is: " + response.body().getName());
+                }
+
+                @Override
+                public void onFailure(Call<Product> call, Throwable t) {
+
+                }
+            });
+        }
+        mRelatedItemsLiveData.setValue(relatedItems);
     }
 
 }

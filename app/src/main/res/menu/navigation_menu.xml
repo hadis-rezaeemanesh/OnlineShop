@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group >
-        <item
-            android:id="@+id/menu_home"
-            android:title="@string/menu_home" />
-        <item
-            android:id="@+id/menu_newest"
-            android:title="@string/menu_newest" />
-        <item
-            android:id="@+id/menu_popular"
-            android:title="@string/menu_popular" />
-        <item
-            android:id="@+id/menu_most_sells"
-            android:title="@string/menu_most_sells" />
-    </group>
+
+    <item
+        android:id="@+id/home_menu"
+        android:title="خانه"
+        android:icon="@drawable/ic_home_menu"/>
+    <item
+        android:id="@+id/category_menu"
+        android:title="دسته بندی ها"
+        android:icon="@drawable/ic_category_menu"/>
+    <item
+        android:id="@+id/cart_menu"
+        android:title="سبد خرید"
+        android:icon="@drawable/ic_shpping_cart_dark"/>
+
+
 </menu>

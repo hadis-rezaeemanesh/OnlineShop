@@ -30,14 +30,12 @@ public class GetProductDeserializer implements JsonDeserializer<List<Product>> {
         for (int i = 0; i <jsonArray.size() ; i++) {
             JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
 
-            if (!jsonObject.has("url"))
-                continue;
-
             int id = jsonObject.get("id").getAsInt();
             String name = jsonObject.get("name").getAsString();
             String price = jsonObject.get("price").getAsString();
             String url = jsonObject.get("permalink").getAsString();
             int rate = jsonObject.get("rating_count").getAsInt();
+            String description = jsonObject.get("description").getAsString();
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             Date date = new Date();
@@ -63,7 +61,14 @@ public class GetProductDeserializer implements JsonDeserializer<List<Product>> {
                 categoriesId.add(idCategory);
             }
 
-            Product item = new Product(id, name, price, url, rate, date, photoUrls, categoriesId);
+            JsonArray relatedIdArray = jsonObject.get("related_ids").getAsJsonArray();
+            List<Integer> relatedIds = new ArrayList<>();
+            for (int j = 0; j < relatedIdArray.size(); j++) {
+                relatedIds.add(relatedIdArray.get(j).getAsInt());
+            }
+
+            Product item = new Product(id, name, price, url, rate, date,
+                    photoUrls, categoriesId, description, relatedIds);
             items.add(item);
         }
         return items;

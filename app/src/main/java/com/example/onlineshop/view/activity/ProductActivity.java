@@ -12,14 +12,14 @@ import android.os.Bundle;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ActivityOnlineShopBinding;
 import com.example.onlineshop.view.fragment.ProductListFragment;
-import com.example.onlineshop.viewModel.ProductViewModel;
+import com.example.onlineshop.viewModel.ProductListViewModel;
 
 public class ProductActivity extends AppCompatActivity {
 
     public static final String EXTRA_LIST_CATEGORY_NAME = "com.example.onlineshop.listCategoryName";
     private String mCategoryName;
     private ActivityOnlineShopBinding mOnlineShopBinding;
-    private ProductViewModel mProductViewModel;
+    private ProductListViewModel mProductViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class ProductActivity extends AppCompatActivity {
             addFragment(0);
         }
 
-        mProductViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+        mProductViewModel = new ViewModelProvider(this).get(ProductListViewModel.class);
 
         LiveData<Boolean> openedLiveData = mProductViewModel.getOpenLiveData();
 

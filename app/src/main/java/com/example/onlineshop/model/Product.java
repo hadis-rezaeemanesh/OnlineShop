@@ -10,15 +10,18 @@ public class Product {
     private String mUrl;
     private int mRate;
     private Date mCreatedDate;
+    private String mDescription;
     private List<String> mImages;
     private List<Integer> mCategoriesId;
+    private List<Integer> mRelatedIds;
 
 
     public Product() {
     }
 
     public Product(int id, String name, String price, String url, int rate,
-                   Date createdDate, List<String> images, List<Integer> categoriesId) {
+                   Date createdDate, List<String> images, List<Integer> categoriesId,
+                   String description, List<Integer> relatedIds) {
         mId = id;
         mName = name;
         mPrice = price;
@@ -27,6 +30,8 @@ public class Product {
         mCreatedDate = createdDate;
         mImages = images;
         mCategoriesId = categoriesId;
+        mDescription = description;
+        mRelatedIds = relatedIds;
     }
 
     public int getRate() {
@@ -91,5 +96,21 @@ public class Product {
 
     public void setUrl(String url) {
         mUrl = url;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public List<Integer> getRelatedIds() {
+        return mRelatedIds;
+    }
+
+    public void setRelatedIds(List<Integer> relatedIds) {
+        mRelatedIds = relatedIds;
     }
 }

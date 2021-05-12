@@ -3,20 +3,17 @@ package com.example.onlineshop.adapter;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.ActivityOnlineShopBinding;
 import com.example.onlineshop.databinding.ProductItemBinding;
 import com.example.onlineshop.model.Product;
-import com.example.onlineshop.viewModel.ProductViewModel;
+import com.example.onlineshop.viewModel.ProductListViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,12 +25,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     private Context mContext;
     private List<Product> mItems;
-    private ProductViewModel mProductViewModel;
+    private ProductListViewModel mProductViewModel;
+    private int mListPosition;
+    private LifecycleOwner mLifecycleOwner;
 
 
-    public ProductAdapter(ProductViewModel productViewModel, List<Product> items) {
+    public ProductAdapter(LifecycleOwner lifecycleOwner, ProductListViewModel productViewModel, List<Product> items, int listPosition) {
         mProductViewModel = productViewModel;
         mItems = items;
+        mListPosition = listPosition;
+        mLifecycleOwner = lifecycleOwner;
     }
 
     @NonNull
@@ -67,30 +68,33 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         public ProductHolder(ProductItemBinding productItemBinding) {
             super(productItemBinding.getRoot());
             mProductItemBinding = productItemBinding;
-
             mProductItemBinding.setProductViewModel(mProductViewModel);
+            mProductItemBinding.setLifecycleOwner(mLifecycleOwner);
 
             List<Product> items = mItems;
-            List<String> productsName = new ArrayList<>();
-            List<String> productsPrice = new ArrayList<>();
+            /*List<String> productsName = new ArrayList<>();
+            List<String> productsPrice = new ArrayList<>();*/
+            List<Integer> mProductIds = new ArrayList<>();
 
             for (int i = 0; i < items.size(); i++) {
-                productsName.add(items.get(i).getName());
-                productsPrice.add(items.get(i).getPrice());
+               /* productsName.add(items.get(i).getName());
+                productsPrice.add(items.get(i).getPrice());*/
+                mProductIds.add(items.get(i).getId());
             }
+            mProductItemBinding.setProductIdList(mProductIds);
 
-            mProductItemBinding.setProductNameList(productsName);
-            mProductItemBinding.setProductPriceList(productsPrice);
         }
-
         public void bind(int position, Product product){
-            Log.d(TAG, "bind: " + product.getName());
+            Log.d(TAG, "bind: " + product.getUrl());
             mProductItemBinding.setPosition(position);
+            mProductItemBinding.executePendingBindings();
+            mProductItemBinding.setProduct(product);
 
             Picasso.get()
-                    .load(product.getUrl())
+                    .load(product.getImages().get(0))
                     .placeholder(R.drawable.place_holder)
                     .into(mProductItemBinding.imgViewProduct);
+
         }
     }
 }

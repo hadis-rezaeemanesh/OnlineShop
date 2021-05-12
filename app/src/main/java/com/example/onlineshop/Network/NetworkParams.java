@@ -20,17 +20,18 @@ public class NetworkParams {
     }};
 
 
-    public static Map<String, String> getProductsOptions() {
+    public static Map<String, String> getProductsOptions(int page, int idCategory) {
         Map<String, String> productOptions = new HashMap<>();
         productOptions.putAll(options);
-        productOptions.put("per_page", "100" );
+        productOptions.put("page", String.valueOf(page));
+        productOptions.put("Category", String.valueOf(idCategory));
         return productOptions;
     }
 
-    public static Map<String, String> getCategoryOptions() {
+    public static Map<String, String> getCategoryOptions(int page) {
         Map<String, String> categoryOptions = new HashMap<>();
         categoryOptions.putAll(options);
-        categoryOptions.put("per_page", "100");
+        categoryOptions.put("per_page", String.valueOf(page));
         return categoryOptions;
     }
 
