@@ -44,11 +44,11 @@ public class ToolbarFragment extends Fragment {
 
 
 
-        setListeners();
+      /*  setListeners();*/
         return mBinding.getRoot();
     }
 
-    private void setListeners() {
+ /*   private void setListeners() {
         mBinding.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,8 +57,6 @@ public class ToolbarFragment extends Fragment {
                 }
             }
         });
-
-
     }
-
+*/
 }

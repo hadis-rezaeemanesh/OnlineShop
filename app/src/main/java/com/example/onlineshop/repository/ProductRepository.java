@@ -29,7 +29,7 @@ public class ProductRepository {
     private static ProductRepository sInstance;
 
     private List<Product> mProducts;
-    private List<Category> mCategories;
+    private List<Category> mCategories= new ArrayList<>();
 
     private MutableLiveData<List<Product>> mListProductLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Category>> mListCategoryLiveData = new MutableLiveData<>();
@@ -37,6 +37,9 @@ public class ProductRepository {
     private MutableLiveData<List<Product>> mNewestProductsLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mRatedProductsLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mVisitedProductsLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mSearchItemsLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<String>> mPhotoOffersLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mCartLiveData = new MutableLiveData<>();
 
     private MutableLiveData<Integer> mPageCount = new MutableLiveData<>();
     private MutableLiveData<Integer> mCategoryItemId = new MutableLiveData<>();
@@ -44,6 +47,18 @@ public class ProductRepository {
 
     private MutableLiveData<Product> mProductItemLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mRelatedItemsLiveData = new MutableLiveData<>();
+
+    public MutableLiveData<List<Product>> getCartLiveData() {
+        return mCartLiveData;
+    }
+
+    public MutableLiveData<List<String >> getPhotoOffersLiveData() {
+        return mPhotoOffersLiveData;
+    }
+
+    public MutableLiveData<List<Product>> getSearchItemsLiveData() {
+        return mSearchItemsLiveData;
+    }
 
     public MutableLiveData<Product> getProductItemLiveData() {
         return mProductItemLiveData;
@@ -128,6 +143,8 @@ public class ProductRepository {
     }
 
     public void fetchCategoriesAsync(int page){
+        mListCategoryLiveData.setValue(new ArrayList<>());
+
         Call<List<Category>> call = mCategoryService.listCategoryItems(
                 NetworkParams.getCategoryOptions(page));
         call.enqueue(new Callback<List<Category>>() {
@@ -141,7 +158,7 @@ public class ProductRepository {
                 }
                 List<Category> items = response.body();
                 mCategories.addAll(items);
-                mListCategoryLiveData.setValue(mCategories);
+                mListCategoryLiveData.setValue(items);
             }
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
@@ -153,6 +170,7 @@ public class ProductRepository {
     public void fetchTotalProducts() {
         Call<List<Product>> call = mProductService.listProductItems(
                 NetworkParams.getTotalProductsOptions());
+        Log.d(TAG, "fetchTotalProducts: ");
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -263,4 +281,35 @@ public class ProductRepository {
         mRelatedItemsLiveData.setValue(relatedItems);
     }
 
+    public void fetchSearchItems(String query){
+        Call<List<Product>> call = mProductService.listProductItems(
+                NetworkParams.getSearchOptions(query));
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                mSearchItemsLiveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.e(TAG, t.getMessage(), t);
+            }
+        });
+    }
+
+    public void fetchOfferPics(){
+        Call<List<Product>> call = mProductService.listProductItems(
+                NetworkParams.getSearchOptions("تخفیفات"));
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                mPhotoOffersLiveData.setValue(response.body().get(0).getImages());
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.e(TAG, t.getMessage(), t);
+            }
+        });
+    }
 }

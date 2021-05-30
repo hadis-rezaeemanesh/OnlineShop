@@ -1,9 +1,6 @@
 package com.example.onlineshop.adapter;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,31 +9,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.CategoryItemBinding;
-import com.example.onlineshop.databinding.FragmentCategoryBinding;
-import com.example.onlineshop.databinding.ProductItemBinding;
 import com.example.onlineshop.model.Category;
-import com.example.onlineshop.model.Product;
 import com.example.onlineshop.viewModel.CategoryViewModel;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryHolder> {
     private CategoryViewModel mCategoryViewModel;
-    private Context mContext;
-    private List<Category> mItems;
     private static final String TAG = "categoryAdapter";
 
-    public CategoryAdapter(Context context, List<Category> items) {
-        mContext = context;
-        mItems = items;
+    public CategoryAdapter(CategoryViewModel viewModel) {
+        mCategoryViewModel = viewModel;
 
     }
 
     @NonNull
     @Override
     public CategoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CategoryItemBinding binding = DataBindingUtil.inflate( LayoutInflater.from(mContext),
+        CategoryItemBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(mCategoryViewModel.getApplication()),
                 R.layout.category_item,
                 parent,
                 false);
@@ -45,13 +35,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryHolder holder, int position) {
-        holder.bind(mItems.get(position));
+        Category item = mCategoryViewModel.getCurrentCategories().get(position);
+        holder.bind(position, item);
 
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mCategoryViewModel.getCurrentCategories().size();
     }
 
     class CategoryHolder extends RecyclerView.ViewHolder {
@@ -59,14 +50,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         public CategoryHolder(CategoryItemBinding itemBinding) {
             super(itemBinding.getRoot());
             mItemBinding = itemBinding;
+            mItemBinding.setCategoryViewModel(mCategoryViewModel);
         }
 
-        public void bind(Category item){
+        public void bind(int position, Category item){
 
-            mItemBinding.txtViewCount.setText(item.getCount() + " کالا ");
-            Log.d(TAG, "bind: " + item.getCount());
-
-            mItemBinding.txtViewNameCategory.setText(item.getName());
+            mItemBinding.setPosition(position);
+            mItemBinding.executePendingBindings();
 
             Picasso.get()
                     .load(item.getImage())

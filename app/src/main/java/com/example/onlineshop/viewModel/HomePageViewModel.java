@@ -1,6 +1,7 @@
 package com.example.onlineshop.viewModel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -12,12 +13,13 @@ import java.util.List;
 
 public class HomePageViewModel extends ProductViewModel {
 
-
+    public static final String TAG = "homePageViewModel";
     private ProductRepository mRepository;
     private final LiveData<Integer> mPerPage;
     private final LiveData<List<Product>> mVisitedProductsLiveData;
     private final LiveData<List<Product>> mNewestProductsLiveData;
     private final LiveData<List<Product>> mRatedProductsLiveData;
+    private final LiveData<List<String>> mOfferPhotosLiveData;
 
     public HomePageViewModel(@NonNull Application application) {
         super(application);
@@ -26,6 +28,7 @@ public class HomePageViewModel extends ProductViewModel {
         mVisitedProductsLiveData = mRepository.getVisitedProductsLiveData();
         mNewestProductsLiveData = mRepository.getNewestProductsLiveData();
         mRatedProductsLiveData = mRepository.getRatedProductsLiveData();
+        mOfferPhotosLiveData = mRepository.getPhotoOffersLiveData();
     }
 
     public LiveData<Integer> getPerPage() {
@@ -44,7 +47,12 @@ public class HomePageViewModel extends ProductViewModel {
         return mRatedProductsLiveData;
     }
 
+    public LiveData<List<String>> getOfferPhotosLiveData() {
+        return mOfferPhotosLiveData;
+    }
+
     public void fetchTotalProducts(){
+        Log.d(TAG, "fetchTotalProducts: ");
         mRepository.fetchTotalProducts();
     }
 
@@ -57,5 +65,9 @@ public class HomePageViewModel extends ProductViewModel {
     }
     public void fetchRatedProducts(int perPage){
         mRepository.fetchRatedProductsList(perPage);
+    }
+
+    public void fetchOfferPhotos(){
+        mRepository.fetchOfferPics();
     }
 }

@@ -1,25 +1,24 @@
 package com.example.onlineshop.view.fragment;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavOptions;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.example.onlineshop.ObserverEvent;
 import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.CategoryAdapter;
 import com.example.onlineshop.databinding.FragmentCategoryBinding;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.viewModel.CategoryViewModel;
-
 import java.util.List;
 
 public class CategoryFragment extends Fragment {
@@ -63,6 +62,8 @@ public class CategoryFragment extends Fragment {
                 R.layout.fragment_category,
                 container,
                 false );
+        initViews();
+        listeners();
         return mBinding.getRoot();
     }
 
@@ -98,7 +99,26 @@ public class CategoryFragment extends Fragment {
     }
 
     private void setAdapters(List<Category> items) {
-        CategoryAdapter adapter = new CategoryAdapter(getContext(), items);
+        CategoryAdapter adapter = new CategoryAdapter(mCategoryViewModel);
         mBinding.recyclerViewCategoryList.setAdapter(adapter);
     }
+
+   /* private void navListener() {
+
+        LiveData<String> navigateLiveData = mCategoryViewModel.getNavigateLiveData();
+        navigateLiveData.observe(getViewLifecycleOwner(),
+                new ObserverEvent<String>(this, navigateLiveData) {
+                    @Override
+                    public void onChanged(String s) {
+                        super.onChanged(s);
+                        if (s != null){
+                            NavOptions navOptions = new NavOptions.Builder().setPopUpTo(
+                                    R.id.productListFragment, true).build();
+                          *//*  Navigation.findNavController(mBinding.getRoot()).navigate(
+                                    CategoryFragment.action
+                            );*//*
+                        }
+                    }
+                });
+    }*/
 }

@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home_menu"
+        android:id="@+id/homePageFragment"
         android:title="خانه"
         android:icon="@drawable/ic_home_menu"/>
     <item
-        android:id="@+id/category_menu"
+        android:id="@+id/categoryFragment"
         android:title="دسته بندی ها"
         android:icon="@drawable/ic_category_menu"/>
     <item
-        android:id="@+id/cart_menu"
+        android:id="@+id/cartFragment"
         android:title="سبد خرید"
         android:icon="@drawable/ic_shpping_cart_dark"/>
 

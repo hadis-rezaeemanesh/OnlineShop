@@ -66,6 +66,13 @@ public class NetworkParams {
         return totalOptions;
     }
 
+    public static Map<String, String> getSearchOptions(String query){
+        Map<String, String> searchOptions = new HashMap<>();
+        searchOptions.putAll(options);
+        searchOptions.put("search", query);
+        return searchOptions;
+    }
+
 
 
 }

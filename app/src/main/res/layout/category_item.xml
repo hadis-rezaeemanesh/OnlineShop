@@ -19,6 +19,7 @@
         android:layout_margin="8dp"
         android:padding="2dp"
         app:cardCornerRadius="8dp"
+        android:onClick="@{() -> categoryViewModel.onClickListItem(position)}"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +47,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_view_category"
-                android:textSize="15dp" />
+                android:textSize="15sp"
+                android:text="@{categoryViewModel.listCategoryLiveData.get(position).name}"/>
 
             <TextView
                 android:id="@+id/txt_view_count"
@@ -54,10 +56,11 @@
                 android:layout_height="wrap_content"
                 android:padding="3dp"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_name_category" />
+                app:layout_constraintTop_toBottomOf="@id/txt_view_name_category"
+                android:text="@{categoryViewModel.listCategoryLiveData.get(position).count + @string/item_category_kala}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

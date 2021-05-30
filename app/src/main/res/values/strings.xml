@@ -13,4 +13,10 @@
     <string name="menu_popular">پربازدیدترین محصولات</string>
     <string name="menu_newest">جدیدترین محصولات</string>
     <string name="menu_home">خانه</string>
+
+    <string name="whole_list">لیست کامل</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

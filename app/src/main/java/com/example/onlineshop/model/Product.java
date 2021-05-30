@@ -15,7 +15,6 @@ public class Product {
     private List<Integer> mCategoriesId;
     private List<Integer> mRelatedIds;
 
-
     public Product() {
     }
 

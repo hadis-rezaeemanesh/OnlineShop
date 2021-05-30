@@ -87,7 +87,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         public void bind(int position, Product product){
             Log.d(TAG, "bind: " + product.getUrl());
             mProductItemBinding.setPosition(position);
-            mProductItemBinding.executePendingBindings();
+//            mProductItemBinding.executePendingBindings();
             mProductItemBinding.setProduct(product);
 
             Picasso.get()
