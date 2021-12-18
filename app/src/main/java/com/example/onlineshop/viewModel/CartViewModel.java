@@ -38,9 +38,11 @@ public class CartViewModel extends AndroidViewModel {
     public String setTotalPrice() {
         int total = 0;
         List<Product> items = QueryPreferences.getCartProducts(getApplication());
-        for (int i = 0; i < items.size(); i++) {
-            total += Integer.parseInt(items.get(i).getPrice());
-        }
-        return total + " تومان ";
+        if(items != null) {
+            for (int i = 0; i < items.size(); i++) {
+                total += Integer.parseInt(items.get(i).getPrice());
+            }
+            return total + " تومان ";
+        }else return total + " ";
     }
 }
