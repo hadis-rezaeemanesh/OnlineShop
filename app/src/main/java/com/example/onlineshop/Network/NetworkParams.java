@@ -80,6 +80,11 @@ public class NetworkParams {
         return perPageOptions;
     }
 
-
+    public static Map<String, String> getCustomer(String email){
+        Map<String, String> customerOptions = new HashMap<>();
+        customerOptions.putAll(options);
+        customerOptions.put("email", email);
+        return customerOptions;
+    }
 
 }

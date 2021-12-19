@@ -52,6 +52,11 @@ public class HomePageActivity extends AppCompatActivity {
                                 Navigation.findNavController(
                                         HomePageActivity.this,
                                         R.id.nav_home_fragment).navigate(R.id.cartFragment);
+                                break;
+                            case R.id.accountFragment:
+                                Navigation.findNavController(HomePageActivity.this,
+                                        R.id.nav_home_fragment).navigate(R.id.accountFragment);
+                                break;
                         }
                         return true;
                     }

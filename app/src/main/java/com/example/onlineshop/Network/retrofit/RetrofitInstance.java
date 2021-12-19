@@ -2,6 +2,7 @@ package com.example.onlineshop.Network.retrofit;
 
 import com.example.onlineshop.Network.NetworkParams;
 import com.example.onlineshop.model.Category;
+import com.example.onlineshop.model.Customer;
 import com.example.onlineshop.model.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -92,6 +93,16 @@ public class RetrofitInstance {
                 .build();
     }
 
+    public static Retrofit getCustomerInstance(){
+        return new Retrofit.Builder()
+                .baseUrl(NetworkParams.BASE_URL)
+                .addConverterFactory(createGsonConverter(
+                        new TypeToken<List<Customer>>() {}.getType(),
+                        new GetCustomerDeserializer()
+                ))
+                .build();
+    }
+
     private static Converter.Factory createGsonConverter(Type type, Object typeAdapter) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(type, typeAdapter);
@@ -99,5 +110,7 @@ public class RetrofitInstance {
 
         return GsonConverterFactory.create(gson);
     }
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.onlineshop.Network.retrofit;
 
 import com.example.onlineshop.model.Category;
+import com.example.onlineshop.model.Customer;
 import com.example.onlineshop.model.Product;
 
 import java.util.List;
@@ -8,10 +9,13 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 public interface ShopService {
 
@@ -39,5 +43,17 @@ public interface ShopService {
 
     @GET("products/categories/?per_page=100")
     Call<List<Category>> getAllCategories();
+
+
+    @GET("customers")
+    Call<List<Customer>> getCustomer(@QueryMap Map<String, String> options);
+
+    @POST
+    Call<Customer> createCustomer(
+            @Url String url,
+            @Body Customer customer,
+            @Query("consumer_key") String consumerKey,
+            @Query("consumer_secret") String consumerSecret
+    );
 
 }
