@@ -24,14 +24,14 @@ public class NetworkParams {
         Map<String, String> productOptions = new HashMap<>();
         productOptions.putAll(options);
         productOptions.put("page", String.valueOf(page));
-        productOptions.put("Category", String.valueOf(idCategory));
+        productOptions.put("category", String.valueOf(idCategory));
         return productOptions;
     }
 
     public static Map<String, String> getCategoryOptions(int page) {
         Map<String, String> categoryOptions = new HashMap<>();
         categoryOptions.putAll(options);
-        categoryOptions.put("per_page", String.valueOf(page));
+        categoryOptions.put("page", String.valueOf(page));
         return categoryOptions;
     }
 
@@ -71,6 +71,13 @@ public class NetworkParams {
         searchOptions.putAll(options);
         searchOptions.put("search", query);
         return searchOptions;
+    }
+
+    public static Map<String, String> getPerPageForCategory(int categoryId) {
+        Map<String, String> perPageOptions = new HashMap<>();
+        perPageOptions.putAll(options);
+        perPageOptions.put("category", String.valueOf(categoryId));
+        return perPageOptions;
     }
 
 

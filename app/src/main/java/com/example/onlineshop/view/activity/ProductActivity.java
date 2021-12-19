@@ -51,7 +51,7 @@ public class ProductActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container,
-                        ProductListFragment.newInstance(mCategoryName, state))
+                        ProductListFragment.newInstance())
 //                .replace(R.id.fragment_container, CategoryListFragment.newInstance())
                 .commit();
     }

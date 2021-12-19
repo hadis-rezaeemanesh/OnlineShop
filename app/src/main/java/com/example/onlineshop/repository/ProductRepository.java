@@ -113,8 +113,10 @@ public class ProductRepository {
     }
 
     public void fetchProductsAsync(int page, int idCategory){
-        if (page == 1)
+        if (page == 1) {
             mProducts = new ArrayList<>();
+            mListProductLiveData.setValue(mProducts);
+        }
 
         Call<List<Product>> call = mProductService.listProductItems(
                 NetworkParams.getProductsOptions(page, idCategory));
@@ -130,7 +132,7 @@ public class ProductRepository {
 
                 List<Product> items = response.body();
                 mProducts.addAll(items);
-                mListProductLiveData.setValue(items);
+                mListProductLiveData.setValue(mProducts);
                 mCategoryItemId.setValue(idCategory);
             }
 
@@ -304,6 +306,26 @@ public class ProductRepository {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 mPhotoOffersLiveData.setValue(response.body().get(0).getImages());
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.e(TAG, t.getMessage(), t);
+            }
+        });
+    }
+
+    public void fetchTotalProductsForCategory(int categoryId) {
+        Call<List<Product>> call = mProductService.listProductItems(
+                NetworkParams.getPerPageForCategory(categoryId));
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                Headers headerList = response.headers();
+                for (int i = 0; i < headerList.size(); i++) {
+                    int perPage = Integer.parseInt(headerList.get("X-WP-Total"));
+                    mPerPage.setValue(perPage);
+                }
             }
 
             @Override

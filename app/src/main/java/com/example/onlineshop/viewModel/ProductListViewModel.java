@@ -21,7 +21,7 @@ public class ProductListViewModel extends ProductViewModel {
     private final LiveData<List<Product>> mListProductLiveData;
 
     private MutableLiveData<Boolean> mOpenLiveData = new MutableLiveData<>();
-    private MutableLiveData<Uri> mProductPageUri = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mSortDialogStart = new MutableLiveData<>();
 
     private final LiveData<Integer> mPageCount;
     private final LiveData<Integer> mCategoryItemId;
@@ -43,8 +43,8 @@ public class ProductListViewModel extends ProductViewModel {
         return mOpenLiveData;
     }
 
-    public MutableLiveData<Uri> getProductPageUri() {
-        return mProductPageUri;
+    public MutableLiveData<Boolean> getSortDialogStart() {
+        return mSortDialogStart;
     }
 
     public ProductListViewModel(@NonNull Application application) {
@@ -69,4 +69,9 @@ public class ProductListViewModel extends ProductViewModel {
         Log.d(TAG, "fetchProductsAsync: ");
         mProductRepository.fetchProductsAsync(page, mCategoryItemId.getValue());
     }
+
+    public void sortClicked(){
+        mSortDialogStart.setValue(true);
+    }
+
 }

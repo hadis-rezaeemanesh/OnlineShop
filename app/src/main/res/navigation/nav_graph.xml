@@ -48,6 +48,9 @@
                 android:name="productId"
                 app:argType="integer"/>
         </action>
+        <action
+            android:id="@+id/action_productListFragment_to_sortListFragment"
+            app:destination="@id/sortListFragment" />
     </fragment>
     <fragment
         android:id="@+id/productPageFragment"
@@ -57,4 +60,8 @@
         android:id="@+id/cartFragment"
         android:name="com.example.onlineshop.view.fragment.CartFragment"
         android:label="CartFragment" />
+    <fragment
+        android:id="@+id/sortListFragment"
+        android:name="com.example.onlineshop.view.fragment.SortListFragment"
+        android:label="SortListFragment" />
 </navigation>

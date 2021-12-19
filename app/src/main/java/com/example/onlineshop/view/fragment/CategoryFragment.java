@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,6 +65,7 @@ public class CategoryFragment extends Fragment {
                 false );
         initViews();
         listeners();
+        navListener();
         return mBinding.getRoot();
     }
 
@@ -103,7 +105,7 @@ public class CategoryFragment extends Fragment {
         mBinding.recyclerViewCategoryList.setAdapter(adapter);
     }
 
-   /* private void navListener() {
+    private void navListener() {
 
         LiveData<String> navigateLiveData = mCategoryViewModel.getNavigateLiveData();
         navigateLiveData.observe(getViewLifecycleOwner(),
@@ -114,11 +116,10 @@ public class CategoryFragment extends Fragment {
                         if (s != null){
                             NavOptions navOptions = new NavOptions.Builder().setPopUpTo(
                                     R.id.productListFragment, true).build();
-                          *//*  Navigation.findNavController(mBinding.getRoot()).navigate(
-                                    CategoryFragment.action
-                            );*//*
+                            Navigation.findNavController(mBinding.getRoot()).navigate(
+                                    CategoryFragmentDirections.actionCategoryFragmentToProductListFragment(s), navOptions);
                         }
                     }
                 });
-    }*/
+    }
 }
