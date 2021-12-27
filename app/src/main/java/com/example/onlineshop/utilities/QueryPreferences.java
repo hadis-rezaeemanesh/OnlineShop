@@ -12,7 +12,41 @@ import java.util.List;
 
 public class QueryPreferences {
     private static final String PREF_CART_PRODUCT = "cartProduct";
+    private static final String PREF_PRODUCT_ID = "productId";
+    private static final String PREF_USER_EMAIL = "userEmail";
+    private static final String PREF_USER_NAME = "userName";
 
+    public static String getUserName(Context context){
+        return getSharedPreferences(context).getString(PREF_USER_NAME, null );
+    }
+
+    public static void setUserName(Context context, String userName){
+        getSharedPreferences(context)
+                .edit()
+                .putString(PREF_USER_NAME, userName)
+                .apply();
+    }
+
+    public static String getUserEmail(Context context){
+        return getSharedPreferences(context).getString(PREF_USER_EMAIL, null);
+    }
+
+    public static void setUserEmail(Context context, String email){
+        getSharedPreferences(context)
+                .edit()
+                .putString(PREF_USER_EMAIL, email)
+                .apply();
+    }
+
+    public static int getProductId(Context context){
+        return getSharedPreferences(context).getInt(PREF_PRODUCT_ID, 0);
+    }
+    public static void  setProductId(Context context, int productId){
+        getSharedPreferences(context)
+                .edit()
+                .putInt(PREF_PRODUCT_ID, productId)
+                .apply();
+    }
     public static void setCartProducts(Context context, List<Product> productItems){
 
         Gson gson = new Gson();

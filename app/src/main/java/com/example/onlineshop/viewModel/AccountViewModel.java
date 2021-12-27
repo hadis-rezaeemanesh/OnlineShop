@@ -15,7 +15,7 @@ public class AccountViewModel extends ViewModel {
     private LiveData<Customer> mSearchCustomerLiveData;
 
     private MutableLiveData<Boolean> mAlarmDialogLiveData = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mLocatorLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mLocatorClickedLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> mLoginClickedLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> mLoginAccountLiveData = new MutableLiveData<>();
 
@@ -42,8 +42,8 @@ public class AccountViewModel extends ViewModel {
         return mAlarmDialogLiveData;
     }
 
-    public MutableLiveData<Boolean> getLocatorLiveData() {
-        return mLocatorLiveData;
+    public MutableLiveData<Boolean> getLocatorClickedLiveData() {
+        return mLocatorClickedLiveData;
     }
 
     public MutableLiveData<Boolean> getLoginClickedLiveData() {
@@ -52,5 +52,9 @@ public class AccountViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> getLoginAccountLiveData() {
         return mLoginAccountLiveData;
+    }
+
+    public void locationClicked(){
+        mLocatorClickedLiveData.setValue(true);
     }
 }
