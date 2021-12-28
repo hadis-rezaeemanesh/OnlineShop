@@ -28,8 +28,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="8dp"
-                android:src="@drawable/ic_alarm" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_alarm"
+                android:onClick="@{() -> accountViewModel.alarmClicked()}"/>
 
         </RelativeLayout>
 
@@ -85,9 +89,9 @@
                         android:id="@+id/edit_txt_address"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:hint="لطفا آدرس خود را وارد کنید."
-                        android:layout_toRightOf="@id/img_view_location"
                         android:layout_gravity="right"
+                        android:layout_toRightOf="@id/img_view_location"
+                        android:hint="لطفا آدرس خود را وارد کنید."
                         android:padding="12dp"
                         app:errorEnabled="true" />
 

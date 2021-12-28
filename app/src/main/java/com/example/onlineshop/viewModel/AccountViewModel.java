@@ -57,4 +57,8 @@ public class AccountViewModel extends ViewModel {
     public void locationClicked(){
         mLocatorClickedLiveData.setValue(true);
     }
+
+    public void alarmClicked(){
+        mAlarmDialogLiveData.setValue(true);
+    }
 }

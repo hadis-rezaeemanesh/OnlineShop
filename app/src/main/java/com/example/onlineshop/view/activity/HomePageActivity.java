@@ -6,6 +6,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.example.onlineshop.R;
@@ -18,6 +21,10 @@ public class HomePageActivity extends AppCompatActivity {
 
     public static final String TAG = "homePageActivity";
     private ActivityOnlineShopBinding mBinding;
+
+    public static Intent newIntent(Context context){
+        return new Intent(context, HomePageActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

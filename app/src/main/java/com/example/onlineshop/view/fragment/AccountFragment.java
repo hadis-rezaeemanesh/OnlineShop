@@ -70,5 +70,17 @@ public class AccountFragment extends Fragment {
                 }
             }
         });
+
+        LiveData<Boolean> alarmLiveData = mViewModel.getAlarmDialogLiveData();
+        alarmLiveData.observe(
+                getViewLifecycleOwner(),
+                new ObserverEvent<Boolean>(this, alarmLiveData) {
+                    @Override
+                    public void onChanged(Boolean aBoolean) {
+                        super.onChanged(aBoolean);
+                        if (aBoolean)
+                            Navigation.findNavController(mBinding.getRoot()).navigate(R.id.alarmFragment);
+                    }
+                });
     }
 }

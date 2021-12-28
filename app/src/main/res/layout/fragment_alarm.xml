@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="alarmViewModel"
+            type="com.example.onlineshop.viewModel.AlarmViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.fragment.AlarmFragment">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="تنظیم هشدار"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:textColor="@color/primary_text" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/choose_alarm_hours"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_three"
+                android:textSize="14sp"
+                android:text="سه ساعت یک بار" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_five"
+                android:textSize="14sp"
+                android:text="پنج ساعت یک بار" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_eight"
+                android:textSize="14sp"
+                android:text="هشت ساعت یک بار" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_twelve"
+                android:textSize="14sp"
+                android:text="دوازده ساعت یک بار" />
+
+            <RadioButton
+                android:id="@+id/btn_choose_hour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="انتخاب ساعت هشدار" />
+
+
+        </RadioGroup>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_no_alarm"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:id="@+id/img_view_no_alarm"
+            android:onClick="@{() -> alarmViewModel.togglePolling()}"/>
+    </LinearLayout>
+</layout>

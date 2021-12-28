@@ -21,4 +21,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="menu_item_location">location</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="channel_id">online_shop_channel_id</string>
+    <string name="channel_name">OnlineShop Channel</string>
+    <string name="channel_description">This is notification channel for OnlineShop</string>
+
+    <string name="new_product_title">New Product in Online Shop</string>
+    <string name="new_product_text">You have a new product in OnlineShop.</string>
+
 </resources>

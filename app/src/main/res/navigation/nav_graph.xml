@@ -75,9 +75,16 @@
         <action
             android:id="@+id/action_accountFragment_to_locatorFragment"
             app:destination="@id/locatorFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_alarmFragment"
+            app:destination="@id/alarmFragment" />
     </fragment>
     <fragment
         android:id="@+id/locatorFragment"
         android:name="com.example.onlineshop.view.fragment.LocatorFragment"
         android:label="LocatorFragment" />
+    <dialog
+        android:id="@+id/alarmFragment"
+        android:name="com.example.onlineshop.view.fragment.AlarmFragment"
+        android:label="AlarmFragment" />
 </navigation>
