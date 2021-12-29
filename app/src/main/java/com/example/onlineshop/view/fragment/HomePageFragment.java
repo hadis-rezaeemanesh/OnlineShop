@@ -36,7 +36,7 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePageFragment extends Fragment {
+public class HomePageFragment extends VisibleFragment {
 
     private FragmentOnlineShopBinding mBinding;
     private HomePageViewModel mViewModel;

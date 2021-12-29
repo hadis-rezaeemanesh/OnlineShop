@@ -58,14 +58,16 @@
                     android:hint="Email"
                     android:padding="4dp"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp" />
+                    android:layout_height="60dp"
+                    android:onTextChanged="@{accountViewModel::onTextChangedEmail}"/>
 
                 <EditText
                     android:id="@+id/edit_txt_user_name"
                     android:hint="User Name"
                     android:padding="4dp"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp" />
+                    android:layout_height="60dp"
+                    android:onTextChanged="@{accountViewModel::onTextChangedUserName}"/>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -106,6 +108,7 @@
                     android:layout_gravity="bottom|center"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="ثبت نام"
+                    android:onClick="@{() -> accountViewModel.signInClick()}"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginTop="16dp" />
@@ -128,6 +131,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        android:onClick="@{() -> accountViewModel.loginClicked()}"
                         android:text="ورود" />
 
                     <TextView

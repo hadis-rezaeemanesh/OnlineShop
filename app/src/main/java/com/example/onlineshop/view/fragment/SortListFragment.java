@@ -3,7 +3,6 @@ package com.example.onlineshop.view.fragment;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.onlineshop.ObserverEvent;
+import com.example.onlineshop.observers.ObserverEvent;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentSortListBinding;
 import com.example.onlineshop.viewModel.SortListViewModel;

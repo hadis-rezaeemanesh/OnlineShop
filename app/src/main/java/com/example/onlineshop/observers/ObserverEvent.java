@@ -1,4 +1,4 @@
-package com.example.onlineshop;
+package com.example.onlineshop.observers;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;

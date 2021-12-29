@@ -20,7 +20,7 @@ import com.example.onlineshop.viewModel.CartViewModel;
 
 import java.util.List;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends VisibleFragment {
 
     private FragmentCartBinding mCartBinding;
     private CartViewModel mCartViewModel;

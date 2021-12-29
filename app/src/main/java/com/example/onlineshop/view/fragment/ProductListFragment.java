@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,7 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.onlineshop.ObserverEvent;
+import com.example.onlineshop.observers.ObserverEvent;
 import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.ProductAdapter;
 import com.example.onlineshop.databinding.FragmentProductListBinding;
@@ -31,7 +30,7 @@ import com.example.onlineshop.viewModel.ProductListViewModel;
 
 import java.util.List;
 
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends VisibleFragment {
 
     public static final String ARGS_LIST_NAME = "listName";
     public static final String ARGS_LIST_STATE = "listState";

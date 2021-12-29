@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 
-public class ProductDetailFragment extends Fragment {
+public class ProductDetailFragment extends VisibleFragment {
 
     public ProductDetailFragment() {
         // Required empty public constructor
