@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.repository.ProductRepository;
@@ -15,16 +16,29 @@ import java.util.List;
 public class CartViewModel extends AndroidViewModel {
 
     private ProductRepository mRepository;
-    private LiveData<List<Product>> mCartLiveData;
+    private MutableLiveData<List<Product>> mCartProductItem;
+    private MutableLiveData<Boolean> mStartAccountDialog = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mSendDialogLiveData = new MutableLiveData<>();
 
-    public LiveData<List<Product>> getCartLiveData() {
-        return mCartLiveData;
-    }
+
 
     public CartViewModel(Application application) {
         super(application);
         mRepository = ProductRepository.getInstance();
-        mCartLiveData = mRepository.getCartLiveData();
+        mCartProductItem = mRepository.getCartLiveData();
+
+    }
+
+    public MutableLiveData<List<Product>> getCartProductItem() {
+        return mCartProductItem;
+    }
+
+    public MutableLiveData<Boolean> getStartAccountDialog() {
+        return mStartAccountDialog;
+    }
+
+    public MutableLiveData<Boolean> getSendDialogLiveData() {
+        return mSendDialogLiveData;
     }
 
     public void deleteFromCart(Product item){
@@ -44,5 +58,18 @@ public class CartViewModel extends AndroidViewModel {
             }
             return total + " تومان ";
         }else return total + " ";
+    }
+
+    public void fetchCartItems() {
+        List<Product> cartItems = QueryPreferences.getCartProducts(getApplication());
+        if (cartItems != null)
+            mCartProductItem.setValue(cartItems);
+    }
+
+    public void requestOrder() {
+        if (QueryPreferences.getUserEmail(getApplication()) == null)
+            mStartAccountDialog.setValue(true);
+        else
+            mSendDialogLiveData.setValue(true);
     }
 }

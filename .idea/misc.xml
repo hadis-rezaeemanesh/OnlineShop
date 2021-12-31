@@ -4,12 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/activity_maps.xml" value="0.2546875" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/cart_item.xml" value="0.15081521739130435" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/category_item.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_account.xml" value="0.132" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_alarm.xml" value="0.2546875" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_cart.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_category.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_locator.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_login.xml" value="0.2536231884057971" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_order.xml" value="0.24954710144927536" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_product_detail.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_product_list.xml" value="0.11865942028985507" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OnlineShop/app/src/main/res/layout/fragment_sort_list.xml" value="0.23777173913043478" />

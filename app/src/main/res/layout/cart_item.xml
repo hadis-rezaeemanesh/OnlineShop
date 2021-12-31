@@ -30,7 +30,7 @@
             android:layout_marginRight="16dp"
             android:layout_alignParentTop="true"
             android:layout_alignBottom="@id/cart_image_product"
-            android:text="@{cartViewModel.cartLiveData.get(position).name}"
+            android:text="@{cartViewModel.cartProductItem.get(position).name}"
             android:textSize="16sp" />
 
         <LinearLayout
@@ -45,7 +45,7 @@
                 android:src="@drawable/ic_trash"
                 android:background="#FFFFFF"
                 android:layout_gravity="center"
-                android:onClick="@{() -> cartViewModel.deleteFromCart(cartViewModel.cartLiveData.get(position))}"
+                android:onClick="@{() -> cartViewModel.deleteFromCart(cartViewModel.cartProductItem.get(position))}"
                 android:padding="14dp" />
 
             <ImageButton
@@ -54,7 +54,7 @@
                 android:src="@drawable/ic_add_cart"
                 android:background="#FFFFFF"
                 android:layout_gravity="center"
-                android:onClick="@{() -> cartViewModel.addCartAgain(cartViewModel.cartLiveData.get(position))}"
+                android:onClick="@{() -> cartViewModel.addCartAgain(cartViewModel.cartProductItem.get(position))}"
                 android:padding="14dp" />
 
             <TextView

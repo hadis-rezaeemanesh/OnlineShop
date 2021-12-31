@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.repository.ProductRepository;
+import com.example.onlineshop.utilities.QueryPreferences;
 
 import java.util.List;
 
@@ -33,5 +34,12 @@ public class ProductPageViewModel extends ProductViewModel {
 
     public void fetchRelatedProducts(List<Integer> productRelatedIds){
         mRepository.fetchRelatedProducts(productRelatedIds);
+    }
+
+    public void addToCartClicked(){
+        Product item = mProductLiveData.getValue();
+        item.setCountInCart(1);
+        QueryPreferences.addCartProduct(getApplication(), item);
+        mRepository.setCartItemLiveData(QueryPreferences.getCartProducts(getApplication()));
     }
 }

@@ -1,9 +1,11 @@
 package com.example.onlineshop.adapter;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
@@ -23,17 +25,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     @NonNull
     @Override
     public CartHolder onCreateViewHolder( ViewGroup parent, int viewType) {
-        return null;
+        return new CartHolder(DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.cart_item,
+                parent,
+                false
+        ));
     }
 
     @Override
     public void onBindViewHolder( CartAdapter.CartHolder holder, int position) {
+        holder.bindItems(mViewModel.getCartProductItem().getValue().get(position), position);
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mViewModel.getCartProductItem().getValue().size();
     }
 
     public class CartHolder extends RecyclerView.ViewHolder {

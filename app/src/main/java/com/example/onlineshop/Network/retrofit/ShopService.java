@@ -2,6 +2,7 @@ package com.example.onlineshop.Network.retrofit;
 
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Customer;
+import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
 
 import java.util.List;
@@ -52,6 +53,14 @@ public interface ShopService {
     Call<Customer> createCustomer(
             @Url String url,
             @Body Customer customer,
+            @Query("consumer_key") String consumerKey,
+            @Query("consumer_secret") String consumerSecret
+    );
+
+    @POST
+    Call<Order> sendOrder(
+            @Url String url,
+            @Body Order order,
             @Query("consumer_key") String consumerKey,
             @Query("consumer_secret") String consumerSecret
     );

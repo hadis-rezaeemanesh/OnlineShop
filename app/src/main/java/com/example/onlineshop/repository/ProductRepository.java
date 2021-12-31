@@ -47,6 +47,15 @@ public class ProductRepository {
 
     private MutableLiveData<Product> mProductItemLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mRelatedItemsLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mCartItemLiveData = new MutableLiveData<>();
+
+    public MutableLiveData<List<Product>> getCartItemLiveData() {
+        return mCartItemLiveData;
+    }
+
+    public void setCartItemLiveData(List<Product> cartItemLiveData) {
+        mCartItemLiveData.setValue(cartItemLiveData);
+    }
 
     public MutableLiveData<List<Product>> getCartLiveData() {
         return mCartLiveData;

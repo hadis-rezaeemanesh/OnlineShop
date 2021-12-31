@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="orderViewModel"
+            type="com.example.onlineshop.viewModel.OrderViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.OrderFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_view_send_to"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="ارسال به: "
+            android:layout_margin="15dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toLeftOf="@id/txt_view_send_to"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="36dp"
+            android:textColor="@color/primary_text"
+            android:text="@{orderViewModel.customerLiveData.userName"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="جمع کل خرید شما: "
+            app:layout_constraintTop_toBottomOf="@id/txt_view_send_to"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="16dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="0dp"
+            android:layout_height="19dp"
+            android:layout_margin="16dp"
+            android:textColor="@color/primary_text"
+            android:text="@{orderViewModel.setTotalPrice()}"
+            android:textSize="16sp"
+            app:layout_constraintRight_toLeftOf="@id/tv_total"
+            app:layout_constraintTop_toBottomOf="@id/tv_username" />
+
+        <EditText
+            android:id="@+id/et_coupon_code"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"
+            app:layout_constraintRight_toLeftOf="@id/tv_coupon"
+            app:layout_constraintTop_toBottomOf="@id/tv_total_price"
+            android:layout_margin="16dp" />
+
+        <TextView
+            android:id="@+id/tv_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="کد تخفیف: "
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_total"
+            app:layout_constraintBottom_toBottomOf="@id/et_coupon_code"
+            android:layout_margin="16dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16dp"
+            android:paddingTop="16dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/send_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="ثبت"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_total_price"
+            app:layout_constraintRight_toLeftOf="@id/et_coupon_code"
+            android:layout_margin="16sp" />
+
+        <Button
+            android:id="@+id/send_order"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/et_coupon_code"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="24dp"
+            android:text="ارسال سفارش"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:onClick="@{() -> orderViewModel.sendOrder()}"
+            android:backgroundTint="@color/colorPrimary" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

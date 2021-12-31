@@ -14,6 +14,7 @@ public class Product {
     private List<String> mImages;
     private List<Integer> mCategoriesId;
     private List<Integer> mRelatedIds;
+    private int mCountInCart = 0;
 
     public Product() {
     }
@@ -111,5 +112,13 @@ public class Product {
 
     public void setRelatedIds(List<Integer> relatedIds) {
         mRelatedIds = relatedIds;
+    }
+
+    public int getCountInCart() {
+        return mCountInCart;
+    }
+
+    public void setCountInCart(int mCountInCart) {
+        this.mCountInCart = mCountInCart;
     }
 }
