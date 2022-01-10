@@ -9,6 +9,7 @@ import com.example.onlineshop.Network.retrofit.RetrofitInstance;
 import com.example.onlineshop.Network.retrofit.ShopService;
 import com.example.onlineshop.model.Customer;
 import com.example.onlineshop.model.Order;
+import com.example.onlineshop.model.Review;
 
 import java.util.List;
 
@@ -21,10 +22,13 @@ public class CustomerRepository {
     private static final String TAG = "CustomerRepository";
     private static CustomerRepository sInstance;
     private ShopService mShopServiceCustomer;
+    private ShopService mShopServiceReview;
     private MutableLiveData<Customer> mCustomerLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> mRegisterLiveData = new MutableLiveData<>();
     private MutableLiveData<Customer> mSearchEmailLiveData = new MutableLiveData<>();
     private MutableLiveData<Order> mOrderLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mSendReview = new MutableLiveData<>();
+    private MutableLiveData<List<Review>> mReviewLiveData = new MutableLiveData<>();
 
     public static CustomerRepository getInstance() {
         if (sInstance == null)
@@ -34,6 +38,15 @@ public class CustomerRepository {
 
     private CustomerRepository() {
         mShopServiceCustomer = RetrofitInstance.getCustomerInstance().create(ShopService.class);
+        mShopServiceReview = RetrofitInstance.getReviewInstance().create(ShopService.class);
+    }
+
+    public MutableLiveData<List<Review>> getReviewLiveData() {
+        return mReviewLiveData;
+    }
+
+    public MutableLiveData<Boolean> getSendReview() {
+        return mSendReview;
     }
 
     public MutableLiveData<Customer> getCustomerLiveData() {
@@ -123,6 +136,44 @@ public class CustomerRepository {
 
             @Override
             public void onFailure(Call<Order> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void sendReview(Review review){
+        Call<Review> call = mShopServiceReview.sendReview(
+                "https://woocommerce.maktabsharif.ir/wp-json/wc/v3/products/reviews",
+                review,
+                NetworkParams.CONSUMER_KEY,
+                NetworkParams.CONSUMER_SECRET
+        );
+        call.enqueue(new Callback<Review>() {
+            @Override
+            public void onResponse(Call<Review> call, Response<Review> response) {
+                if(response.isSuccessful())
+                    mSendReview.setValue(true);
+            }
+
+            @Override
+            public void onFailure(Call<Review> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void fetchProductReviews(int productId){
+        Call<List<Review>> call =
+                mShopServiceReview.getReviews(NetworkParams.getReviews(productId));
+        call.enqueue(new Callback<List<Review>>() {
+            @Override
+            public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
+                mReviewLiveData.setValue(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Review>> call, Throwable t) {
 
             }
         });

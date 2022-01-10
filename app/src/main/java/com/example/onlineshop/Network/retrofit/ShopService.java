@@ -4,6 +4,7 @@ import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Customer;
 import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.model.Review;
 
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,19 @@ public interface ShopService {
             @Body Order order,
             @Query("consumer_key") String consumerKey,
             @Query("consumer_secret") String consumerSecret
+    );
+
+    @POST
+    Call<Review> sendReview(
+            @Url String url,
+            @Body Review review,
+            @Query("consumer_key") String consumerKey,
+            @Query("consumer_secret") String consumerSecret
+    );
+
+    @GET("products/reviews")
+    Call<List<Review>> getReviews(
+            @QueryMap Map<String, String> options
     );
 
 }

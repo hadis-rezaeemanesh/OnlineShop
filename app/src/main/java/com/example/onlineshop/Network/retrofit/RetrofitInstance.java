@@ -4,6 +4,7 @@ import com.example.onlineshop.Network.NetworkParams;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Customer;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.model.Review;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -99,6 +100,16 @@ public class RetrofitInstance {
                 .addConverterFactory(createGsonConverter(
                         new TypeToken<List<Customer>>() {}.getType(),
                         new GetCustomerDeserializer()
+                ))
+                .build();
+    }
+
+    public static Retrofit getReviewInstance(){
+        return new Retrofit.Builder()
+                .baseUrl(NetworkParams.BASE_URL)
+                .addConverterFactory(createGsonConverter(
+                        new TypeToken<List<Review>>() {}.getType(),
+                        new GetReviewDeserializer()
                 ))
                 .build();
     }

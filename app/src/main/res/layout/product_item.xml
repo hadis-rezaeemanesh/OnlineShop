@@ -11,14 +11,6 @@
             type="com.example.onlineshop.viewModel.ProductListViewModel" />
 
         <variable
-            name="position"
-            type="Integer" />
-
-        <variable
-            name="productIdList"
-            type="java.util.List&lt;Integer&gt;" />
-
-        <variable
             name="product"
             type="com.example.onlineshop.model.Product" />
 

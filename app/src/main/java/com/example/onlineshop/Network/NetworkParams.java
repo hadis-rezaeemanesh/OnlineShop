@@ -87,4 +87,12 @@ public class NetworkParams {
         return customerOptions;
     }
 
+    public static Map<String, String> getReviews(int productId){
+        Map<String, String> reviewOptions = new HashMap<>();
+        reviewOptions.putAll(options);
+        reviewOptions.put("product", String.valueOf(productId));
+        Log.e("productReview", String.valueOf(productId));
+        return reviewOptions;
+    }
+
 }

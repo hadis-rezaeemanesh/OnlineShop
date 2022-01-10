@@ -81,12 +81,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
                 productsPrice.add(items.get(i).getPrice());*/
                 mProductIds.add(items.get(i).getId());
             }
-            mProductItemBinding.setProductIdList(mProductIds);
 
         }
         public void bind(int position, Product product){
             Log.d(TAG, "bind: " + product.getUrl());
-            mProductItemBinding.setPosition(position);
 //            mProductItemBinding.executePendingBindings();
             mProductItemBinding.setProduct(product);
 

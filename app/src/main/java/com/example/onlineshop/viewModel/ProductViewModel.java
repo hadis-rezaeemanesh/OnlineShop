@@ -7,11 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.onlineshop.repository.CustomerRepository;
 import com.example.onlineshop.repository.ProductRepository;
 
 public class ProductViewModel extends AndroidViewModel {
 
     private ProductRepository mRepository;
+    private CustomerRepository mCustomerRepository;
     private MutableLiveData<Integer> mClickedItem;
 
     public MutableLiveData<Integer> getClickedItem() {
@@ -23,11 +25,13 @@ public class ProductViewModel extends AndroidViewModel {
         super(application);
 
         mRepository = ProductRepository.getInstance();
+        mCustomerRepository = CustomerRepository.getInstance();
     }
 
     public void onItemClicked(int id){
-        Log.e("productItemClicked", "this id clicked in pvm" + id);
+
         mRepository.fetchProductWithId(id);
+        mCustomerRepository.fetchProductReviews(id);
         mClickedItem.setValue(id);
     }
 

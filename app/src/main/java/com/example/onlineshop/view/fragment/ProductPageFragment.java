@@ -18,9 +18,11 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.adapter.ProductAdapter;
+import com.example.onlineshop.adapter.ReviewAdapter;
 import com.example.onlineshop.adapter.SliderViewPagerAdapter;
 import com.example.onlineshop.databinding.FragmentProductDetailBinding;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.model.Review;
 import com.example.onlineshop.viewModel.ProductPageViewModel;
 import com.example.onlineshop.viewModel.ProductListViewModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -128,5 +130,6 @@ public class ProductPageFragment extends Fragment {
                 true);
         mBinding.rvRelatedProducts.setLayoutManager(linearLayoutManager);
     }
+
 
 }

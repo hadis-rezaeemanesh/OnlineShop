@@ -29,4 +29,6 @@
     <string name="new_product_title">New Product in Online Shop</string>
     <string name="new_product_text">You have a new product in OnlineShop.</string>
 
+    <string name="rate"> امتیاز </string>
+
 </resources>
